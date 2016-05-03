@@ -1,4 +1,4 @@
-var introGameApp = angular.module('introGameApp', ['ionic'])
+var introGameApp = angular.module('introGameApp', ['ionic', 'ui.router'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -16,4 +16,24 @@ var introGameApp = angular.module('introGameApp', ['ionic'])
       StatusBar.styleDefault();
     }
   });
-})
+});
+
+introGameApp.config(function($stateProvider, $urlRouterProvider){
+  // $urlRouterProvider.otherwise('/albums');
+  // console.log($state)
+ // $stateProvider
+  $stateProvider
+    .state('albums', {
+      url: '/albums',
+      templateUrl: 'views/partials/albums.html'
+    })
+    .state('song', {
+      url: '/song',
+      templateUrl: 'views/partials/song.html'
+    })
+    .state('answer', {
+      url: '/answer',
+      templateUrl: 'views/partials/answer.html'
+    })
+
+  })
