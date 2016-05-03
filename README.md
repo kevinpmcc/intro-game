@@ -22,16 +22,9 @@ In order to make the game challenging
 I would like to hear a clip of length no longer than one second
 
 As a player
-In order to mitigate frustration
-I want to see the details of the song if I am unable to guess
+In order to quench my curiosity 
+I would like the title and artist to be revealed
 
-As a player 
-In order to validate my guess
-I want to see the details of the song after I have guessed
-
-As a player
-In order to show off 
-I want a time interval in which to make my guess
 
 As a player
 Having demonstrated my ignorance
@@ -46,6 +39,10 @@ I would like to be able to replay the clip before guessing
 Nice to have
 ============
 ```
+As a player
+In order to show off 
+I want a time interval in which to make my guess
+
 As a player
 In order to distract me from my commute
 I would like to be able to play the game on my portable device
@@ -78,20 +75,19 @@ I would like to only hear clips from a recognisable portion of the track
 ```
 
 Technical considerations
-========================
-- MVP as front-end only, single page app (Angular)
-- ideally using technology that maps readily onto a mobile app (eg Ionic)
--
+------------------------
+- MVP as front-end only, single page app (Angular) in browser
+- ideally using technology that maps readily onto a mobile app framework (eg Ionic)
 
-- Technical risk areas
-- --------------------
+Technical risk areas
+--------------------
 -   controlling the music player
--   dealing with fixed time periods
 -   mobile implementation
 -   API authentication
--   
+-   hosting a front-end only on Heroku
 
 Assumptions
 -----------
 - Able to access tracks and previews without account from an online music provider
 - Use Spotify as the online music provider
+- Host the app on Heroku
