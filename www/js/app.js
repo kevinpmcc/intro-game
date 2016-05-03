@@ -1,4 +1,4 @@
-var ionicTestApp = angular.module('ionicTestApp', ['ionic'])
+var introGameApp = angular.module('introGameApp', ['ionic'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
