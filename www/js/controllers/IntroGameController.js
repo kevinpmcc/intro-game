@@ -1,3 +1,6 @@
-introGameApp.controller('IntroGameController', [function() {
-  this.introGame = "IntroGame1";
-}]);
+angular.module('introGame.controller',[])
+  .controller('IntroGameController', IntroGameController);
+
+  function IntroGameController() {
+    this.introGame = "IntroGame1";
+  };

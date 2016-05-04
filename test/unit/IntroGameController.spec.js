@@ -1,5 +1,5 @@
 describe('IntroGameController', function() {
-  beforeEach(module('introGameApp'));
+  beforeEach(module('introGame.app'));
   it('initialises with a toDo', function() {
     expect(ctrl.introGame).toEqual("IntroGame1");
   });
