@@ -2,8 +2,9 @@ module.exports = function(config){
   config.set({
      basePath : '../',
      files : [
-        'www/lib/ionic/js/ionic.bundle.js',
-        'www/lib/ionic/js/angular-mocks/angular-mocks.js',
+       'www/lib/spotify-web-api-js/src/spotify-web-api.js',
+       'www/lib/ionic/js/ionic.bundle.js',
+       'www/lib/ionic/js/angular-mocks/angular-mocks.js',
         'www/js/**/*.js',
         'test/unit/**/*.js'
       ],
