@@ -1,4 +1,8 @@
 <h2>Albums page</h2>
-<li ng-class="{active: $state.includes(\'song\')}" class>
-  <a ui-sref="song" href="#/song">Song</a>
-</li>
+
+<div id="introGame" ng-controller="IntroGameController as controller">
+  <li ng-class="{active: $state.includes(\'song\')}" class>
+    <a ui-sref="song" href="#/song">Song</a>
+  </li>
+  <p>{{ controller.introGame }}</p>
+</div>

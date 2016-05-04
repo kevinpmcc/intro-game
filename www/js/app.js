@@ -1,4 +1,4 @@
-var introGameApp = angular.module('introGameApp', ['ionic', 'ui.router'])
+angular.module('introGameApp', ['ionic', 'introGameApp.routing'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -17,23 +17,3 @@ var introGameApp = angular.module('introGameApp', ['ionic', 'ui.router'])
     }
   });
 });
-
-introGameApp.config(function($stateProvider, $urlRouterProvider){
-  // $urlRouterProvider.otherwise('/albums');
-  // console.log($state)
- // $stateProvider
-  $stateProvider
-    .state('albums', {
-      url: '/albums',
-      templateUrl: 'views/partials/albums.html'
-    })
-    .state('song', {
-      url: '/song',
-      templateUrl: 'views/partials/song.html'
-    })
-    .state('answer', {
-      url: '/answer',
-      templateUrl: 'views/partials/answer.html'
-    })
-
-  })
