@@ -1,4 +1,4 @@
-angular.module('introGameApp.routing', ['ui.router'])
+angular.module('introGame.routing', ['ui.router'])
    .config(function($stateProvider, $urlRouterProvider){
     $urlRouterProvider
       .when('','/albums')

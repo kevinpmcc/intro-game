@@ -1,4 +1,6 @@
-angular.module('introGameApp', ['ionic'])
-  .controller('IntroGameController', [function() {
+angular.module('introGame.controller',[])
+  .controller('IntroGameController', IntroGameController);
+
+  function IntroGameController() {
     this.introGame = "IntroGame1";
-  }]);
+  };

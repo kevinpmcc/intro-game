@@ -14,7 +14,7 @@ describe('introApp.routing', function(){
     }};
   }
 
-  beforeEach(module('introGameApp.routing'));
+  beforeEach(module('introGame.routing'));
 
   beforeEach(inject(function (_$state_, _$stateParams_, _$q_, _$templateCache_, _$location_, _$rootScope_, _$injector_) {
     $state = _$state_;
