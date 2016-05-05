@@ -76,10 +76,10 @@ function _sortObjectArray(a, b){
 function getAlbumSongs(){
   return  [ {"artist" : "AC/DC",
                   "title" : "Beating Around the Bush",
-                  "previewUrl" : "https://p.scdn.co/mp3-preview/2577c8d371ab4ef3b253f0638ca85155c1fdc495"},
+                  "previewUrl" : "https://p.scdn.co/mp3-preview/2577c8d371ab4ef3b253f0638ca85155c1fdc495#t=,1"},
                   {"artist" : "AC/DC",
                    "title" : "Walk All over You",
-                  "previewUrl" : "https://p.scdn.co/mp3-preview/2577c8d371ab4ef3b253f0638ca85155c1fdc495"}];
+                  "previewUrl" : "https://p.scdn.co/mp3-preview/2577c8d371ab4ef3b253f0638ca85155c1fdc495#t=,1"}];
 };
 
 function getApiJsonResponse(){

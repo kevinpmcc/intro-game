@@ -5,7 +5,7 @@ angular.module('introGame.songFactory', [])
       // console.log("**** IN REAL FACTORY ****" + track.name)
       this.artist = track.artists[0].name;
       this.title = track.name;
-      this.previewUrl = track.preview_url;
+      this.previewUrl = track.preview_url + "#t=,1";
     };
     return createSong;
   });
