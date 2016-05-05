@@ -20,14 +20,22 @@ describe('SongFetcherService', function() {
     httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
   })
 
-  it('retrieves data from API and returns array of song objects', function(){
-    SongFetcherService.getAlbum(albumID).then(function(results){
-      expect(results[0].artist).toEqual(expectedResponse[0].artist);
-      expect(results[0].title).toEqual(expectedResponse[0].title);
-      expect(results[0].previewUrl).toEqual(expectedResponse[0].previewUrl);
+  it('retrieves data from API and stores in an array of song objects', function(){
+    SongFetcherService.getAlbum(albumID).then(function(){
+      expect(sorted(SongFetcherService.songs)[0].artist).toEqual(expectedResponse[0].artist);
+      expect(sorted(SongFetcherService.songs)[0].title).toEqual(expectedResponse[0].title);
+      expect(sorted(SongFetcherService.songs)[0].previewUrl).toEqual(expectedResponse[0].previewUrl);
     });
     httpBackend.flush();
   });
+
+  function sorted(songs){
+    return songs.sort(_sortObjectArray);
+  }
+
+  function _sortObjectArray(a, b){
+    return Number(a.title > b.title);
+  }
 
   it('creates a new SongFactory', function() {
     spyOn(SongFetcherService, '_newSongFactory');
@@ -37,12 +45,19 @@ describe('SongFetcherService', function() {
     httpBackend.flush();
   });
 
+  it('pops a song from the array and stores it for use in song and answer screens', function(){
+    SongFetcherService.getAlbum(albumID).then(function(){
+      console.log(SongFetcherService.songs);
+    });
+    console.log(SongFetcherService.songs);
+    httpBackend.flush();
+  });
 });
 
 function getAlbumSongs(){
   return  [ {"artist" : "AC/DC",
-                  "title" : "Highway to Hell",
-                  "previewUrl" : "https://p.scdn.co/mp3-preview/aa4f9186e0c3f4436bb40572a63862db80d7ef2d"}];
+                  "title" : "Beating Around the Bush",
+                  "previewUrl" : "https://p.scdn.co/mp3-preview/2577c8d371ab4ef3b253f0638ca85155c1fdc495"}];
 
 
 };
