@@ -1,10 +1,8 @@
 describe('SongFetcherService', function() {
 
-
   var SongFetcherService;
   var SongFactory;
   var httpBackend;
-  var mockSongFactory;
 
   var albumID = '10v912xgTZbjAtYfyKWJCS';
   var apiJsonResponse = getApiJsonResponse();
@@ -12,24 +10,17 @@ describe('SongFetcherService', function() {
 
   beforeEach(module('introGame.SongFetcherService'));
 
-
-
-
-
   beforeEach(inject(function(_SongFetcherService_, _SongFactory_, $httpBackend, $rootScope, $q) {
-    deferred = $q.defer()
-    scope = $rootScope;
-
     SongFactory = _SongFactory_;
-
     httpBackend = $httpBackend;
     SongFetcherService = _SongFetcherService_;
-
   }));
 
-  it('retrieves data from API and returns array of song objects', function(){
-    console.log("in data retrieval test")
+  beforeEach(function(){
     httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
+  })
+
+  it('retrieves data from API and returns array of song objects', function(){
     SongFetcherService.getAlbum(albumID).then(function(results){
       expect(results[0].artist).toEqual(expectedResponse[0].artist);
       expect(results[0].title).toEqual(expectedResponse[0].title);
@@ -39,11 +30,9 @@ describe('SongFetcherService', function() {
   });
 
   it('creates a new SongFactory', function() {
-    console.log('in our test')
     spyOn(SongFetcherService, '_newSongFactory');
-    httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
     SongFetcherService.getAlbum(albumID).then(function(results){
-      expect(SongFetcherService._newSongFactory).toHaveBeenCalled();
+      expect(SongFetcherService._newSongFactory.calls.count()).toEqual(10);
     });
     httpBackend.flush();
   });
@@ -57,8 +46,6 @@ function getAlbumSongs(){
 
 
 };
-
-
 
 function getApiJsonResponse(){
   return {
