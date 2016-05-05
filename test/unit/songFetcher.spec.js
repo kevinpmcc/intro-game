@@ -1,31 +1,53 @@
 describe('SongFetcherService', function() {
 
-  beforeEach(module('introGame.SongFetcherService'));
+
   var SongFetcherService;
+  var SongFactory;
   var httpBackend;
+  var mockSongFactory;
 
   var albumID = '10v912xgTZbjAtYfyKWJCS';
   var apiJsonResponse = getApiJsonResponse();
-
   var expectedResponse = getAlbumSongs();
 
+  beforeEach(module('introGame.SongFetcherService'));
 
-  beforeEach(inject(function(_SongFetcherService_, $httpBackend) {
-    console.log ("yippee")
-      httpBackend = $httpBackend;
-      SongFetcherService = _SongFetcherService_;
+
+
+
+
+  beforeEach(inject(function(_SongFetcherService_, _SongFactory_, $httpBackend, $rootScope, $q) {
+    deferred = $q.defer()
+    scope = $rootScope;
+
+    SongFactory = _SongFactory_;
+
+    httpBackend = $httpBackend;
+    SongFetcherService = _SongFetcherService_;
+
   }));
+
   it('retrieves data from API and returns array of song objects', function(){
+    console.log("in data retrieval test")
     httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
     SongFetcherService.getAlbum(albumID).then(function(results){
-      console.log("processing promise");
-      console.log(results)
-      console.log("expected results");
-      console.log(expectedResponse)
-      expect(results[0]).toEqual(expectedResponse[0]);
+      expect(results[0].artist).toEqual(expectedResponse[0].artist);
+      expect(results[0].title).toEqual(expectedResponse[0].title);
+      expect(results[0].previewUrl).toEqual(expectedResponse[0].previewUrl);
     });
     httpBackend.flush();
   });
+
+  it('creates a new SongFactory', function() {
+    console.log('in our test')
+    spyOn(SongFetcherService, '_newSongFactory');
+    httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
+    SongFetcherService.getAlbum(albumID).then(function(results){
+      expect(SongFetcherService._newSongFactory).toHaveBeenCalled();
+    });
+    httpBackend.flush();
+  });
+
 });
 
 function getAlbumSongs(){
