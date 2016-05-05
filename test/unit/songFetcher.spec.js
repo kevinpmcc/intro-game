@@ -16,41 +16,50 @@ describe('SongFetcherService', function() {
     SongFetcherService = _SongFetcherService_;
   }));
 
-  beforeEach(function(){
-    httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
-  })
+  describe('#getAlbum', function(){
 
-  it('retrieves data from API and stores in an array of song objects', function(){
-    SongFetcherService.getAlbum(albumID).then(function(){
-      expect(sorted(SongFetcherService.songs)[0].artist).toEqual(expectedResponse[0].artist);
-      expect(sorted(SongFetcherService.songs)[0].title).toEqual(expectedResponse[0].title);
-      expect(sorted(SongFetcherService.songs)[0].previewUrl).toEqual(expectedResponse[0].previewUrl);
+    beforeEach(function(){
+      httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
+    })
+
+    afterEach(function(){
+      httpBackend.flush();
+    })
+
+    it('retrieves data from API and stores in an array of song objects', function(){
+      SongFetcherService.getAlbum(albumID).then(function(){
+        expect(sorted(SongFetcherService.songs)[0].artist).toEqual(expectedResponse[0].artist);
+        expect(sorted(SongFetcherService.songs)[0].title).toEqual(expectedResponse[0].title);
+        expect(sorted(SongFetcherService.songs)[0].previewUrl).toEqual(expectedResponse[0].previewUrl);
+      });
+
     });
-    httpBackend.flush();
+
+    function sorted(songs){
+      return songs.sort(_sortObjectArray);
+    }
+
+    function _sortObjectArray(a, b){
+      return Number(a.title > b.title);
+    }
+
+    it('invokes SongFactory for each song returned by API ', function() {
+      spyOn(SongFetcherService, '_newSongFactory');
+      SongFetcherService.getAlbum(albumID).then(function(results){
+        expect(SongFetcherService._newSongFactory.calls.count()).toEqual(10);
+      });
+    });
+
   });
 
-  function sorted(songs){
-    return songs.sort(_sortObjectArray);
-  }
+  describe('#getSong', function(){
 
-  function _sortObjectArray(a, b){
-    return Number(a.title > b.title);
-  }
-
-  it('creates a new SongFactory', function() {
-    spyOn(SongFetcherService, '_newSongFactory');
-    SongFetcherService.getAlbum(albumID).then(function(results){
-      expect(SongFetcherService._newSongFactory.calls.count()).toEqual(10);
-    });
-    httpBackend.flush();
-  });
-
-  it('pops a song from the array and stores it for use in song and answer screens', function(){
-    SongFetcherService.getAlbum(albumID).then(function(){
+    it('pops a song from the array and stores it for use in song and answer screens', function(){
+      SongFetcherService.getAlbum(albumID).then(function(){
+        console.log(SongFetcherService.songs);
+      });
       console.log(SongFetcherService.songs);
     });
-    console.log(SongFetcherService.songs);
-    httpBackend.flush();
   });
 });
 
