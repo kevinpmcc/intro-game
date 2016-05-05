@@ -1,5 +1,9 @@
 angular.module('introGame.routing', ['ui.router'])
-   .config(function($stateProvider, $urlRouterProvider){
+   .config(function($sceDelegateProvider, $stateProvider, $urlRouterProvider){
+    $sceDelegateProvider.resourceUrlWhitelist([
+        'self',
+        'https://p.scdn.co/mp3-preview/**'
+    ]);
     $urlRouterProvider
       .when('','/albums')
       .when('/','/albums')

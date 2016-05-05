@@ -5,6 +5,7 @@ angular.module('introGame.controller',[])
 
     self.songs = [];
 
+    self.currentSong = "";
 
     self.displaySongs = function() {
       SongFetcherService.getAlbum('10v912xgTZbjAtYfyKWJCS')
