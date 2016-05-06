@@ -2,6 +2,7 @@ angular.module('introGame.albumController',['ui.router'])
   .controller('AlbumController', ['SongFetcherService', '$state', function(SongFetcherService, $state) {
 
     var self = this;
+
     self.albums = [];
 
     self.currentSong;
@@ -15,16 +16,16 @@ angular.module('introGame.albumController',['ui.router'])
         .then(function() {
           SongFetcherService.nextSong();
           self.currentSong = SongFetcherService.currentSong;
-          console.log(self.currentSong)
+          console.log('balls')
+          console.log(self.currentSong.title)
           self._changeToSongState();
         });
     };
 
+
     self._changeToSongState = function(){
 
       $state.go('song', {})
-      console.log('bob')
-      console.log($state.current.name)
     }
 
     // self.songs = [];

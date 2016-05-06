@@ -9,14 +9,16 @@ angular.module('introGame.routing', ['ui.router'])
       .state('albums', {
         url: '/albums',
         templateUrl: 'views/partials/albums.html'
+
       })
       .state('song', {
         url: '/song',
-        templateUrl: 'views/partials/song.html'
+        templateUrl: 'views/partials/song.html',
       })
       .state('answer', {
         url: '/answer',
         templateUrl: 'views/partials/answer.html'
+
       })
       // .run(['$state', function($state)])
     })

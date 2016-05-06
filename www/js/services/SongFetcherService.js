@@ -21,6 +21,8 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory'])
       }
       sf.nextSong = function(){
           sf.currentSong = sf.songs.pop();
+          console.log("THIS ONE")
+          console.log(sf.currentSong.title)
       }
 
       function shuffle(array) {
