@@ -5,9 +5,8 @@ describe('SongController', function() {
   var ctrl;
 
   beforeEach(inject(function($rootScope, $controller) {
-    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['currentSongFN']);
-    SongFetcherService.currentSongFN.and.returnValue("song1");
-    scope = $rootScope;
+    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['currentSongFunction']);
+    SongFetcherService.currentSongFunction.and.returnValue("song1");
     ctrl = $controller('SongController', {
       SongFetcherService: SongFetcherService,
     });
@@ -15,9 +14,8 @@ describe('SongController', function() {
 
   it('calls SongFetcherService.currentSong', function() {
     ctrl.loadCurrentSong();
-    scope.$apply();
     expect(ctrl.currentSong).toEqual("song1");
-    expect(SongFetcherService.currentSongFN).toHaveBeenCalled();
+    expect(SongFetcherService.currentSongFunction).toHaveBeenCalled();
   });
 
 })
