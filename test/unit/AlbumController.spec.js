@@ -1,27 +1,21 @@
 describe('AlbumController', function() {
   beforeEach(module('introGame.albumController'));
 
-  var SongFetcherService;
+  var SongFetcherService, stateMock;
   var ctrl;
 
   beforeEach(inject(function($rootScope, $controller, $q) {
    deferred = $q.defer();
    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['getAlbum', 'nextSong']);
    SongFetcherService.getAlbum.and.returnValue($q.when(""));
+
+   stateMock = jasmine.createSpyObj('$state spy', ['go']);
+
    scope = $rootScope;
-  //  state = $state;
-  //  location = $location;
-  //  stateParams = $stateParams;
-  //  stateProvider = $stateProvider;
+
    ctrl = $controller('AlbumController', {
      SongFetcherService: SongFetcherService,
-     _changeToSongState: function(){
-       console.log("yippee")
-     }
-    //  $state: state,
-    //  $location: location,
-    //  $stateParams: stateParams,
-    //  $stateProvider: stateProvider
+     $state: stateMock
    });
 
  }));
@@ -46,13 +40,10 @@ describe('AlbumController', function() {
       expect(SongFetcherService.nextSong).toHaveBeenCalled();
     });
 
-    xit('calls ctrl.changeToSongState', function() {
-      spyOn(ctrl, '_changeToSongState')
-      expect(ctrl._changeToSongState).toHaveBeenCalled();
+    it('calls ctrl.changeToSongState', function() {
+      expect(stateMock.go).toHaveBeenCalledWith('song',{});
     })
   });
-
-
 
   var album1 = {
     artist: "AC/DC",

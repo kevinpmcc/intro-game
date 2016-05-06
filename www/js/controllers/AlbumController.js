@@ -11,36 +11,18 @@ angular.module('introGame.albumController',['ui.router'])
     };
 
     self.loadSongToGuess = function(albumID) {
+      console.log("in loadSongToGuess")
       return SongFetcherService.getAlbum(albumID)
         .then(function() {
           SongFetcherService.nextSong();
           self.currentSong = SongFetcherService.currentSong;
-          console.log(self.currentSong)
           self._changeToSongState();
         });
     };
 
     self._changeToSongState = function(){
-
       $state.go('song', {})
-      console.log('bob')
-      console.log($state.current.name)
     }
-
-    // self.songs = [];
-    //
-    // self.displaySongs = function() {
-    //   SongFetcherService.getAlbum('10v912xgTZbjAtYfyKWJCS')
-    //   .then(function(data) {
-    //     self.songs = data;
-    //   });
-    // };
-    //
-    // self.displaySongs();
-    //
-    // function IntroGameController() {
-    //   this.introGame = "IntroGame1";
-    // };
 
     var album1 = {
       artist: "AC/DC",

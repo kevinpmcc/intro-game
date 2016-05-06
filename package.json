@@ -13,6 +13,7 @@
     "karma-chrome-launcher": "^1.0.1",
     "karma-jasmine": "^0.3.8",
     "protractor": "^3.3.0",
+    "protractor-http-mock": "^0.7.0",
     "shelljs": "^0.3.0"
   },
   "dependencies": {
