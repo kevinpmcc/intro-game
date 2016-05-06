@@ -50,6 +50,7 @@ describe('SongFetcherService', function() {
       SongFetcherService.nextSong();
       var newSongsLength = SongFetcherService.songs.length;
       expect(initialSongsLength - newSongsLength).toEqual(1);
+      console.log(SongFetcherService.currentSong)
       expect(SongFetcherService.currentSong.title).toEqual(expectedResponse[1].title)
       });
     });
