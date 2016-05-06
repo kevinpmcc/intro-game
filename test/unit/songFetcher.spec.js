@@ -3,7 +3,6 @@ describe('SongFetcherService', function() {
   var SongFetcherService;
   var SongFactory;
   var httpBackend;
-
   var albumID = '10v912xgTZbjAtYfyKWJCS';
   var apiJsonResponse = getApiJsonResponse();
   var expectedResponse = getAlbumSongs();
@@ -18,15 +17,13 @@ describe('SongFetcherService', function() {
 
   beforeEach(function(){
     httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
-  })
+  });
 
   afterEach(function(){
     httpBackend.flush();
-  })
+  });
 
   describe('#getAlbum', function(){
-
-
 
     it('retrieves data from API and stores in an array of song objects', function(){
       SongFetcherService.getAlbum(albumID).then(function(){
@@ -34,9 +31,7 @@ describe('SongFetcherService', function() {
         expect(sorted(SongFetcherService.songs)[0].title).toEqual(expectedResponse[0].title);
         expect(sorted(SongFetcherService.songs)[0].previewUrl).toEqual(expectedResponse[0].previewUrl);
       });
-
     });
-
 
     it('invokes SongFactory for each song returned by API ', function() {
       spyOn(SongFetcherService, '_newSongFactory');
@@ -44,7 +39,6 @@ describe('SongFetcherService', function() {
         expect(SongFetcherService._newSongFactory.calls.count()).toEqual(10);
       });
     });
-
   });
 
   describe('#nextSong', function(){
@@ -58,11 +52,8 @@ describe('SongFetcherService', function() {
       expect(initialSongsLength - newSongsLength).toEqual(1);
       expect(SongFetcherService.currentSong.title).toEqual(expectedResponse[1].title)
       });
-
     });
   });
-
-
 });
 
 function sorted(songs){
