@@ -1,6 +1,7 @@
 angular.module('introGame.app', ['ionic',
                                 'introGame.routing',
-                                'introGame.controller',
+                                'introGame.albumController',
+                                'introGame.songController',
                                 'introGame.SongFetcherService',
                                 'introGame.songFactory'])
 
