@@ -4,6 +4,6 @@ angular.module('introGame.songController',['ui.router'])
     var self = this;
 
     self.loadCurrentSong = function() {
-      self.currentSong = SongFetcherService.fetchCurrentSong();
+      return SongFetcherService.fetchCurrentSong();
     }
 }]);
