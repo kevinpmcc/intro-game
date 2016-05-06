@@ -5,7 +5,7 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory'])
     sf.songs = [];
     sf.currentSong = ""
 
-    sf.currentSongFunction = function() {
+    sf.fetchCurrentSong = function() {
       return sf.currentSong;
     };
 
