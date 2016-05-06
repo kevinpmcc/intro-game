@@ -3,6 +3,7 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory'])
     var sf = this;
 
     sf.songs = [];
+    sf.currentSong = ""
 
     sf.getAlbum = function(albumID){
         return $http.get('https://api.spotify.com/v1/albums/' + albumID + '/tracks')
@@ -17,6 +18,9 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory'])
 
       sf._newSongFactory = function(track){
         return new SongFactory(track);
+      }
+      sf.nextSong = function(){
+          sf.currentSong = sf.songs.pop();
       }
 
       function shuffle(array) {

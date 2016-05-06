@@ -16,15 +16,17 @@ describe('SongFetcherService', function() {
     SongFetcherService = _SongFetcherService_;
   }));
 
+  beforeEach(function(){
+    httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
+  })
+
+  afterEach(function(){
+    httpBackend.flush();
+  })
+
   describe('#getAlbum', function(){
 
-    beforeEach(function(){
-      httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
-    })
 
-    afterEach(function(){
-      httpBackend.flush();
-    })
 
     it('retrieves data from API and stores in an array of song objects', function(){
       SongFetcherService.getAlbum(albumID).then(function(){
@@ -35,13 +37,6 @@ describe('SongFetcherService', function() {
 
     });
 
-    function sorted(songs){
-      return songs.sort(_sortObjectArray);
-    }
-
-    function _sortObjectArray(a, b){
-      return Number(a.title > b.title);
-    }
 
     it('invokes SongFactory for each song returned by API ', function() {
       spyOn(SongFetcherService, '_newSongFactory');
@@ -52,23 +47,39 @@ describe('SongFetcherService', function() {
 
   });
 
-  describe('#getSong', function(){
+  describe('#nextSong', function(){
 
     it('pops a song from the array and stores it for use in song and answer screens', function(){
       SongFetcherService.getAlbum(albumID).then(function(){
-        console.log(SongFetcherService.songs);
+      var initialSongsLength = SongFetcherService.songs.length;
+      SongFetcherService.songs = sorted(SongFetcherService.songs);
+      SongFetcherService.nextSong();
+      var newSongsLength = SongFetcherService.songs.length;
+      expect(initialSongsLength - newSongsLength).toEqual(1);
+      expect(SongFetcherService.currentSong.title).toEqual(expectedResponse[1].title)
       });
-      console.log(SongFetcherService.songs);
+
     });
   });
+
+
 });
+
+function sorted(songs){
+  return songs.sort(_sortObjectArray);
+}
+
+function _sortObjectArray(a, b){
+  return Number(a.title > b.title);
+}
 
 function getAlbumSongs(){
   return  [ {"artist" : "AC/DC",
                   "title" : "Beating Around the Bush",
-                  "previewUrl" : "https://p.scdn.co/mp3-preview/2577c8d371ab4ef3b253f0638ca85155c1fdc495"}];
-
-
+                  "previewUrl" : "https://p.scdn.co/mp3-preview/2577c8d371ab4ef3b253f0638ca85155c1fdc495#t=,1"},
+                  {"artist" : "AC/DC",
+                   "title" : "Walk All over You",
+                  "previewUrl" : "https://p.scdn.co/mp3-preview/2577c8d371ab4ef3b253f0638ca85155c1fdc495#t=,1"}];
 };
 
 function getApiJsonResponse(){
