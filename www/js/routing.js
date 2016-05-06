@@ -18,4 +18,5 @@ angular.module('introGame.routing', ['ui.router'])
         url: '/answer',
         templateUrl: 'views/partials/answer.html'
       })
+      // .run(['$state', function($state)])
     })

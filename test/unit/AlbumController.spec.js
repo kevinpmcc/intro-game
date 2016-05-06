@@ -9,9 +9,21 @@ describe('AlbumController', function() {
    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['getAlbum', 'nextSong']);
    SongFetcherService.getAlbum.and.returnValue($q.when(""));
    scope = $rootScope;
+  //  state = $state;
+  //  location = $location;
+  //  stateParams = $stateParams;
+  //  stateProvider = $stateProvider;
    ctrl = $controller('AlbumController', {
      SongFetcherService: SongFetcherService,
+     _changeToSongState: function(){
+       console.log("yippee")
+     }
+    //  $state: state,
+    //  $location: location,
+    //  $stateParams: stateParams,
+    //  $stateProvider: stateProvider
    });
+
  }));
 
   it('stores album data in an array', function() {
@@ -20,17 +32,27 @@ describe('AlbumController', function() {
     expect(ctrl.albums[0]).toEqual(album1);
   });
 
-  it('calls songFetcherService.getAlbum', function() {
-    ctrl.fetchAlbumData(albumID);
-    scope.$apply();
-    expect(SongFetcherService.getAlbum).toHaveBeenCalled();
+  describe('#loadSongToGuess', function() {
+    beforeEach(function(){
+      ctrl.loadSongToGuess(albumID);
+      scope.$apply();
+    });
+
+    it('calls songFetcherService.getAlbum', function() {
+      expect(SongFetcherService.getAlbum).toHaveBeenCalled();
+    });
+
+    it('calls songFetcherService.nextSong', function() {
+      expect(SongFetcherService.nextSong).toHaveBeenCalled();
+    });
+
+    xit('calls ctrl.changeToSongState', function() {
+      spyOn(ctrl, '_changeToSongState')
+      expect(ctrl._changeToSongState).toHaveBeenCalled();
+    })
   });
 
-  it('calls songFetcherService.nextSong', function() {
-    ctrl.fetchAlbumData(albumID);
-    scope.$apply();
-    expect(SongFetcherService.nextSong).toHaveBeenCalled();
-  });
+
 
   var album1 = {
     artist: "AC/DC",

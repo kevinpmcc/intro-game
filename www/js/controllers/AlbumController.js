@@ -1,19 +1,31 @@
-angular.module('introGame.albumController',[])
-  .controller('AlbumController', ['SongFetcherService', function(SongFetcherService) {
+angular.module('introGame.albumController',['ui.router'])
+  .controller('AlbumController', ['SongFetcherService', '$state', function(SongFetcherService, $state) {
 
     var self = this;
     self.albums = [];
+
+    self.currentSong;
 
     self.loadAlbum = function() {
       self.albums.push(album1);
     };
 
-    self.fetchAlbumData = function(albumID) {
+    self.loadSongToGuess = function(albumID) {
       return SongFetcherService.getAlbum(albumID)
         .then(function() {
           SongFetcherService.nextSong();
+          self.currentSong = SongFetcherService.currentSong;
+          console.log(self.currentSong)
+          self._changeToSongState();
         });
     };
+
+    self._changeToSongState = function(){
+
+      $state.go('song', {})
+      console.log('bob')
+      console.log($state.current.name)
+    }
 
     // self.songs = [];
     //
