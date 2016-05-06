@@ -1,6 +1,11 @@
-var introGameApp = angular.module('introGameApp', ['ionic', 'ui.router'])
+angular.module('introGame.app', ['ionic',
+                                'introGame.routing',
+                                'introGame.controller',
+                                'introGame.SongFetcherService',
+                                'introGame.songFactory'])
 
 .run(function($ionicPlatform) {
+  console.log("Start of app");
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -17,23 +22,3 @@ var introGameApp = angular.module('introGameApp', ['ionic', 'ui.router'])
     }
   });
 });
-
-introGameApp.config(function($stateProvider, $urlRouterProvider){
-  $urlRouterProvider.otherwise('/albums');
-  // console.log($state)
- // $stateProvider
-  $stateProvider
-    .state('albums', {
-      url: '/albums',
-      templateUrl: 'views/partials/albums.html'
-    })
-    .state('song', {
-      url: '/song',
-      templateUrl: 'views/partials/song.html'
-    })
-    .state('answer', {
-      url: '/answer',
-      templateUrl: 'views/partials/answer.html'
-    })
-
-  })
