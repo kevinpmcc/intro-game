@@ -6,7 +6,7 @@
     <p> {{ song.artist }} </p>
   </div>
   <li ng-class="{active: $state.includes('song')}" class>
-    <a ui-sref="song" href="#/song">Song</a>
+    <a id="song" ui-sref="song" href="#/song">Song</a>
   </li>
   <p>{{ controller.introGame }}</p>
 </div>
