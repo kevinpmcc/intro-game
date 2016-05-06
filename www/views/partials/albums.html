@@ -1,13 +1,13 @@
 <h2>Albums page</h2>
 
 <div id="songs" ng-controller="AlbumController as controller">
-  <!-- <div ng-repeat="song in controller.songs">
+  <div ng-repeat="song in controller.songs">
     <p> {{ song.title }} </p>
     <p> {{ song.artist }} </p>
-  </div> -->
-  <!-- <li ng-class="{active: $state.includes('song')}" class>
+  </div>
+  <li ng-class="{active: $state.includes('song')}" class>
     <a id="song" ui-sref="song" href="#/song">Song</a>
-  </li> -->
+  </li>
   <p>{{ controller.currentSong.title }}</p>
   <button ng-click="controller.loadSongToGuess('10v912xgTZbjAtYfyKWJCS')">button</button>
 </div>
