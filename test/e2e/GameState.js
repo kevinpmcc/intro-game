@@ -284,7 +284,6 @@ describe("Current Angular UI router state", function () {
         var el = document.querySelector("html");  // ng-app is defined on html element in this case
         var injector = angular.element(el).injector();
         var service = injector.get('$state');
-
         callback(service.current.name);
       });
 

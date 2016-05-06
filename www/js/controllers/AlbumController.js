@@ -2,6 +2,7 @@ angular.module('introGame.albumController',['ui.router'])
   .controller('AlbumController', ['SongFetcherService', '$state', function(SongFetcherService, $state) {
 
     var self = this;
+
     self.albums = [];
 
     self.currentSong;
