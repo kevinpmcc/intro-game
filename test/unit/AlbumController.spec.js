@@ -8,9 +8,7 @@ describe('AlbumController', function() {
    deferred = $q.defer();
    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['getAlbum', 'nextSong']);
    SongFetcherService.getAlbum.and.returnValue($q.when(""));
-
    stateMock = jasmine.createSpyObj('$state spy', ['go']);
-
    scope = $rootScope;
 
    ctrl = $controller('AlbumController', {
