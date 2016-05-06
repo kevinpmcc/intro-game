@@ -1,13 +1,17 @@
-angular.module('introGame.songController',['ui.router'])
-  .controller('SongController', ['SongFetcherService', '$state', function(SongFetcherService, $state) {
+angular.module('introGame.songController',['ngAudio'])
+  .controller('SongController', ['SongFetcherService', 'ngAudio', function(SongFetcherService, ngAudio) {
 
     var self = this;
 
-    self.currentSong;
-
-    self.loadCurrentSong = function() {
-      self.currentSong = SongFetcherService.currentSong;
+    function _loadPreviewUrl() {
+      console.log(SongFetcherService.currentSong.previewUrl)
+      return SongFetcherService.currentSong.previewUrl;
     }
 
-    self.loadCurrentSong();
+    self.playCurrentSong = function(){
+      console.log("playCurrentSong")
+      sound = ngAudio.load(_loadPreviewUrl());
+      sound.play()
+    }
+
 }]);
