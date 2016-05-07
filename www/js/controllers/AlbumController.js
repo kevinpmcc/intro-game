@@ -3,17 +3,14 @@ angular.module('introGame.albumController',['ui.router'])
 
     var self = this;
 
-
-
-    self.currentSong;
-
+    self.currentSong = function() {
+      return SongFetcherService.currentSong();
+    };
 
     self.loadSongToGuess = function(albumID) {
-      console.log("in loadSongToGuess")
       return SongFetcherService.getAlbum(albumID)
         .then(function() {
-          SongFetcherService.nextSong();
-          self.currentSong = SongFetcherService.currentSong;
+          self.currentSong();
           self._changeToSongState();
         });
     };

@@ -13,11 +13,12 @@ angular.module('introGame.answerController', [])
     }
 
     self._changeToSongState = function() {
+      SongFetcherService.nextSong();
       $state.go('song', {})
     }
 
     self.currentSong = function() {
-      return SongFetcherService.currentSong;
+      return SongFetcherService.currentSong();
     }
 
   }])
