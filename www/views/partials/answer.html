@@ -1,10 +1,12 @@
-<div class="bar bar-header bar-positive">
-  <h1 class="title">My First Mobile App</h1>
-</div>
 <h2>Answer page</h2>
-<li ng-class="{active: $state.includes('albums')}" class>
-  <a id ="albums" ui-sref="albums" href="#/albums">Play again!</a>
-</li>
-<div id="introGame" ng-controller="IntroGameController as controller">
-  <p>{{ controller.introGame }}</p>
+<div id="answer" ng-controller="AnswerController as controller">
+
+  {{ controller.currentSong().title }}
+  {{ controller.currentSong().artist }}
+
+  <button class="button" ng-click="controller.loadSongToGuess()">Another song from this album</button>
+  <button class="button" ng-click="controller._changeToAlbumState()">Pick another album</button>
+
+
+
 </div>
