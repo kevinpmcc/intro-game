@@ -1,6 +1,12 @@
-var ionicTestApp = angular.module('ionicTestApp', ['ionic'])
+angular.module('introGame.app', ['ionic',
+                                'introGame.routing',
+                                'introGame.albumController',
+                                'introGame.songController',
+                                'introGame.SongFetcherService',
+                                'introGame.songFactory'])
 
 .run(function($ionicPlatform) {
+  console.log("Start of app");
   $ionicPlatform.ready(function() {
     if(window.cordova && window.cordova.plugins.Keyboard) {
       // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -16,4 +22,4 @@ var ionicTestApp = angular.module('ionicTestApp', ['ionic'])
       StatusBar.styleDefault();
     }
   });
-})
+});

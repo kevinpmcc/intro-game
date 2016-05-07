@@ -3,13 +3,10 @@ angular.module('introGame.albumController',['ui.router'])
 
     var self = this;
 
-    self.albums = [];
+
 
     self.currentSong;
 
-    self.loadAlbum = function() {
-      self.albums.push(album1);
-    };
 
     self.loadSongToGuess = function(albumID) {
       console.log("in loadSongToGuess")
@@ -25,11 +22,16 @@ angular.module('introGame.albumController',['ui.router'])
       $state.go('song', {})
     }
 
-    var album1 = {
-      artist: "AC/DC",
-      title: "Highway to Hell",
-      albumID: "10v912xgTZbjAtYfyKWJCS",
-      img_url: "https://i.scdn.co/image/42dab3e45b3b9f2ba85538f8dc08e544ac9778d2"
-    }
+    var allAlbums = [{
+         artist: "AC/DC",
+         title: "Highway to Hell",
+         albumID: "10v912xgTZbjAtYfyKWJCS",
+         img_url: "https://i.scdn.co/image/42dab3e45b3b9f2ba85538f8dc08e544ac9778d2"},
+       {artist: "Destiny's Child",
+         title: "Survivor",
+         albumID: "2HcjLD0ButtKsQYqzoyOx9",
+         img_url: "https://i.scdn.co/image/1f45888d95a106efb58f40ffc808d3d9d6b0b99a"
+       }];
 
-  }]);
+       self.albums = allAlbums;
+     }]);
