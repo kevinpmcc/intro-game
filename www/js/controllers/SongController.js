@@ -3,6 +3,7 @@ angular.module('introGame.songController',['ngAudio'])
 
     var self = this;
 
+
     function _loadPreviewUrl() {
       console.log(SongFetcherService.currentSong.previewUrl)
       return SongFetcherService.currentSong.previewUrl;

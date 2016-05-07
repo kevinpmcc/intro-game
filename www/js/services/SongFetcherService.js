@@ -3,7 +3,10 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory'])
     var sf = this;
 
     sf.songs = [];
-    sf.currentSong = ""
+
+    sf.currentSong = function() {
+        return sf.songs[sf.songs.length - 1]
+    };
 
     sf.allSongs = [];
 
@@ -27,8 +30,8 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory'])
       }
 
       sf.nextSong = function(){
-        console.log("EVIL")
-          sf.currentSong = sf.songs.pop();
+          sf.songs.pop();
+
       }
 
       function shuffle(array) {

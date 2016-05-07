@@ -3,7 +3,12 @@ angular.module('introGame.albumController',['ui.router'])
 
     var self = this;
 
+<<<<<<< HEAD
     self.currentSong;
+=======
+    self.albums = [];
+
+>>>>>>> refactor-currentsong
 
     self.allAlbumTracks = function() {
       return SongFetcherService.songs
@@ -14,10 +19,12 @@ angular.module('introGame.albumController',['ui.router'])
         console.log('WINNER')}
         }
     self.loadSongToGuess = function(albumID) {
-      console.log("in loadSongToGuess")
       return SongFetcherService.getAlbum(albumID)
         .then(function() {
+<<<<<<< HEAD
           self.currentSong = SongFetcherService.currentSong;
+=======
+>>>>>>> refactor-currentsong
           self._changeToSongState();
         });
     };

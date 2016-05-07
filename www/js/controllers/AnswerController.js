@@ -3,12 +3,18 @@ angular.module('introGame.answerController', [])
 
     var self = this;
 
+
+    self.currentSong = function() {
+      return SongFetcherService.currentSong;
+    };
+
     self.loadSongToGuess = function() {
       SongFetcherService.nextSong();
       self._changeToSongState();
     };
 
-    self._changeToAlbumState = function() {
+
+    self.changeToAlbumState = function() {
       $state.go('albums', {})
     }
 

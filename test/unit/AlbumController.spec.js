@@ -34,9 +34,6 @@ describe('AlbumController', function() {
       expect(SongFetcherService.getAlbum).toHaveBeenCalled();
     });
 
-    it('calls songFetcherService.nextSong', function() {
-      expect(SongFetcherService.nextSong).toHaveBeenCalled();
-    });
 
     it('calls ctrl.changeToSongState', function() {
       expect(stateMock.go).toHaveBeenCalledWith('song',{});
