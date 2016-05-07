@@ -3,16 +3,20 @@ angular.module('introGame.albumController',['ui.router'])
 
     var self = this;
 
-
-
     self.currentSong;
 
+    self.allAlbumTracks = function() {
+      return SongFetcherService.songs
+    }
 
+    self.guessSong = function(song) {
+      if (song === self.currentSong){
+        console.log('WINNER')}
+        }
     self.loadSongToGuess = function(albumID) {
       console.log("in loadSongToGuess")
       return SongFetcherService.getAlbum(albumID)
         .then(function() {
-          SongFetcherService.nextSong();
           self.currentSong = SongFetcherService.currentSong;
           self._changeToSongState();
         });

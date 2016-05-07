@@ -5,6 +5,8 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory'])
     sf.songs = [];
     sf.currentSong = ""
 
+    sf.allSongs = [];
+
     sf.currentSongFunction = function() {
       return sf.currentSong;
     };
@@ -25,6 +27,7 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory'])
       }
 
       sf.nextSong = function(){
+        console.log("EVIL")
           sf.currentSong = sf.songs.pop();
       }
 

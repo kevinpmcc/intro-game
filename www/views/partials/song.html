@@ -5,3 +5,9 @@
   <button class="button" ng-click="controller._changeToAnswerState()">Answer!</button>
 
 </div>
+<div id="album tracks" ng-controller="AlbumController as controller">
+  <div class="list">
+  <a ng-repeat="song in controller.allAlbumTracks()" class="item"
+  ng-click="controller.guessSong(song)">
+    <p> {{ song.title }} </p>
+  </a>
