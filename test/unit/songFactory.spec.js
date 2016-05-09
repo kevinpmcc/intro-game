@@ -1,5 +1,7 @@
 describe('SongFactory', function() {
 
+  var sf;
+
   beforeEach(module('introGame.songFactory'));
   beforeEach(inject(function(SongFactory) {
     sf = new SongFactory(song);
@@ -9,7 +11,7 @@ describe('SongFactory', function() {
     console.log(sf)
     expect(sf.artist).toEqual("AC/DC")
     expect(sf.title).toEqual("Highway to Hell")
-    expect(sf.previewUrl).toEqual('https://p.scdn.co/mp3-preview/aa4f9186e0c3f4436bb40572a63862db80d7ef2d#t=,1')
+    expect(sf.previewUrl).toEqual('https://p.scdn.co/mp3-preview/aa4f9186e0c3f4436bb40572a63862db80d7ef2d')
   });
 
   var song = {
