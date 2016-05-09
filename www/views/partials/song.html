@@ -1,8 +1,9 @@
-<h2>Song page</h2>
-<div id="songs" ng-controller="SongController as controller">
-<h2>Song page</h2>
-<li ng-class="{active: $state.includes('answer')}" class>
-  <a id="answer" ui-sref="answer" href="#/answer">The Answer</a>
-</li>
-<button ng-click="controller.loadCurrentSong()">button</button>
-</div>
+<ion-header-bar align-title="center" class="bar-positive">
+  <h1 class="title">Song page</h1>
+</ion-header-bar>
+<ion-content>
+  <div id="songs" ng-controller="SongController as controller">
+    <button id="play-button" class="button" ng-click="controller.playCurrentSong()">Play</button>
+    <button id="answer-button" class="button" ng-click="controller._changeToAnswerState()">Answer!</button>
+  </div>
+</ion-content>

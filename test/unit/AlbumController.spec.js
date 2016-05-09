@@ -42,14 +42,4 @@ describe('AlbumController', function() {
       expect(stateMock.go).toHaveBeenCalledWith('song',{});
     })
   });
-
-  var album1 = {
-    artist: "AC/DC",
-    title: "Highway to Hell",
-    albumID: "10v912xgTZbjAtYfyKWJCS",
-    img_url: "https://i.scdn.co/image/42dab3e45b3b9f2ba85538f8dc08e544ac9778d2"
-  }
-
-  var albumID = album1.albumID;
-
 });
