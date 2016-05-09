@@ -10,8 +10,12 @@ angular.module('introGame.songController',['ui.router'])
     }
 
     self.playCurrentSong = function(){
-      var sound = ngAudio.load(self.loadCurrentSong().previewUrl);
+      var sound = ngAudio.load(self.loadCurrentSong().appendedPreviewUrl);
       sound.play()
     };
+
+    self.changeToAnswerState = function(){
+      $state.go('answer', {})
+    }
 
 }]);

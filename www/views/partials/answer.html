@@ -1,10 +1,11 @@
-<div class="bar bar-header bar-positive">
-  <h1 class="title">My First Mobile App</h1>
-</div>
-<h2>Answer page</h2>
-<li ng-class="{active: $state.includes('albums')}" class>
-  <a id ="albums" ui-sref="albums" href="#/albums">Play again!</a>
-</li>
-<div id="introGame" ng-controller="IntroGameController as controller">
-  <p>{{ controller.introGame }}</p>
-</div>
+<ion-header-bar align-title="center" class="bar-positive">
+  <h1 class="title">Answer page</h1>
+</ion-header-bar>
+<ion-content>
+  <div id="answer" ng-controller="AnswerController as controller">
+    <h3>{{ controller.currentSong().artist }}</h3>
+    <p>{{ controller.currentSong().title }}</p>
+    <button id="play-another" class="button" ng-click="controller.loadSongToGuess()">Play another song</button>
+    <button id="new-album" class="button" ng-click="controller.changeToAlbumsState()">New album</button>
+  </div>
+</ion-content>
