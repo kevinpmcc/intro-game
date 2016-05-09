@@ -4,7 +4,6 @@ angular.module('introGame.albumFetcherService', [])
     var af = this;
 
     af.getAlbums = function(){
-      console.log("NOW HERE")
       return new Promise(function (resolve,reject){
         if (true){
         resolve(allAlbums);

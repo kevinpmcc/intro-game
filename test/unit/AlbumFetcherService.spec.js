@@ -10,24 +10,15 @@ beforeEach(module('introGame.albumFetcherService'));
     scope = $rootScope;
   }));
 
-  fdescribe('#getAlbums', function(){
+  describe('#getAlbums', function(){
     it('returns an array of albums', function(done) {
       scope.$apply();
       AlbumFetcherService.getAlbums().then(function(results){
-        console.log("gubbins");
-        console.log(results[0]);
-        console.log(results)
+        expect(results.length).toEqual(6);
         done();
-        console.log(expect(results.length).toEqual.toString())
-        console.log(results.length, 3)
-        expect(results.length).toEqual(3);
-        console.log("THEEND")
       })
-      console.log("HELLOHELLO")
+
     })
-    // it('proves fallacies', function() {
-    //   expect(true).toEqual(false);
-    // });
   });
 
 });
