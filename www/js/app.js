@@ -1,4 +1,5 @@
 angular.module('introGame.app', ['ionic',
+                                'ngAudio',
                                 'introGame.routing',
                                 'introGame.albumController',
                                 'introGame.songController',

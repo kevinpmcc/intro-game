@@ -1,5 +1,5 @@
 angular.module('introGame.songController',['ui.router'])
-  .controller('SongController', ['SongFetcherService', '$state', function(SongFetcherService, $state) {
+  .controller('SongController', ['SongFetcherService', '$state', 'ngAudio', function(SongFetcherService, $state, ngAudio) {
 
     var self = this;
 
@@ -8,4 +8,10 @@ angular.module('introGame.songController',['ui.router'])
     self.loadCurrentSong = function() {
       return SongFetcherService.currentSong(self.SONGLENGTH);
     }
+
+    self.playCurrentSong = function(){
+      var sound = ngAudio.load(self.loadCurrentSong().previewUrl);
+      sound.play()
+    };
+
 }]);
