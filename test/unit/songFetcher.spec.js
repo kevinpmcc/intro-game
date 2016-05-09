@@ -68,7 +68,7 @@ describe('SongFetcherService', function() {
       SongFetcherService.getAlbum(albumID).then(function(){
         SongFetcherService.songs = sorted(SongFetcherService.songs);
         var originalPreviewUrl = expectedResponse[1].previewUrl;
-        expect(SongFetcherService.currentSong(songLength).previewUrl).toEqual(originalPreviewUrl + "#t=," + songLength)
+        expect(SongFetcherService.currentSong(songLength).appendedPreviewUrl).toEqual(originalPreviewUrl + "#t=," + songLength)
       });
     });
 

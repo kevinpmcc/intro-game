@@ -10,7 +10,7 @@ angular.module('introGame.songController',['ui.router'])
     }
 
     self.playCurrentSong = function(){
-      var sound = ngAudio.load(self.loadCurrentSong().previewUrl);
+      var sound = ngAudio.load(self.loadCurrentSong().appendedPreviewUrl);
       sound.play()
     };
 
