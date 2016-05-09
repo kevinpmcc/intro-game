@@ -5,18 +5,13 @@ angular.module('introGame.albumController',['ui.router'])
 
     self.albums = [];
 
-    self.currentSong;
-
-    self.loadAlbum = function() {
-      self.albums.push(album1);
+    self.loadAlbums = function() {
+      self.albums = allAlbums;
     };
 
     self.loadSongToGuess = function(albumID) {
-      console.log("in loadSongToGuess")
       return SongFetcherService.getAlbum(albumID)
         .then(function() {
-          SongFetcherService.nextSong();
-          self.currentSong = SongFetcherService.currentSong;
           self._changeToSongState();
         });
     };
@@ -25,7 +20,9 @@ angular.module('introGame.albumController',['ui.router'])
       $state.go('song', {})
     }
 
-    var allAlbums = [
+    self.loadAlbums();
+
+      var allAlbums = [
         {artist: "AC/DC",
          title: "Highway to Hell",
          albumID: "10v912xgTZbjAtYfyKWJCS",

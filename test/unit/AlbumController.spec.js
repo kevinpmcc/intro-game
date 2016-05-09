@@ -3,6 +3,7 @@ describe('AlbumController', function() {
 
   var SongFetcherService, stateMock;
   var ctrl;
+  var albumID = "10v912xgTZbjAtYfyKWJCS"
 
   beforeEach(inject(function($rootScope, $controller, $q) {
    deferred = $q.defer();
@@ -20,8 +21,8 @@ describe('AlbumController', function() {
 
   it('stores album data in an array', function() {
     expect(ctrl.albums).toBeDefined();
-    ctrl.loadAlbum(album1);
-    expect(ctrl.albums[0]).toEqual(album1);
+    ctrl.loadAlbums();
+    expect(ctrl.albums[0].title).toEqual('Highway to Hell');
   });
 
   describe('#loadSongToGuess', function() {
@@ -32,10 +33,6 @@ describe('AlbumController', function() {
 
     it('calls songFetcherService.getAlbum', function() {
       expect(SongFetcherService.getAlbum).toHaveBeenCalled();
-    });
-
-    it('calls songFetcherService.nextSong', function() {
-      expect(SongFetcherService.nextSong).toHaveBeenCalled();
     });
 
     it('calls ctrl.changeToSongState', function() {

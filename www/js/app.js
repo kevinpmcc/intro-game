@@ -6,7 +6,8 @@ angular.module('introGame.app', ['ionic',
                                 'introGame.answerController',
                                 'introGame.SongFetcherService',
                                 'introGame.songFactory',
-                                'introGame.previewUrlFactory'])
+                                'introGame.previewUrlFactory',
+                                'introGame.albumFetcherService'])
 
 .run(function($ionicPlatform) {
   console.log("Start of app");
