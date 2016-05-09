@@ -2,16 +2,19 @@ describe('SongFetcherService', function() {
 
   var SongFetcherService;
   var SongFactory;
+  var PreviewUrlFactory;
   var httpBackend;
   var albumID = '10v912xgTZbjAtYfyKWJCS';
   var apiJsonResponse = getApiJsonResponse();
   var expectedResponse = getAlbumSongs();
   var songLength = 1;
+  var previewUrl = "https://p.scdn.co/mp3-preview/2577c8d371ab4ef3b253f0638ca85155c1fdc495"
 
   beforeEach(module('introGame.SongFetcherService'));
 
-  beforeEach(inject(function(_SongFetcherService_, _SongFactory_, $httpBackend, $rootScope, $q) {
+  beforeEach(inject(function(_SongFetcherService_, _SongFactory_, _PreviewUrlFactory_, $httpBackend, $rootScope, $q) {
     SongFactory = _SongFactory_;
+    PreviewUrlFactory = _PreviewUrlFactory_;
     httpBackend = $httpBackend;
     SongFetcherService = _SongFetcherService_;
   }));
@@ -44,14 +47,12 @@ describe('test dependent on http backend CODESMELL', function() {
   });
 
   describe('#nextSong', function(){
-
     it('pops a song from the array and stores it for use in song and answer screens', function(){
       SongFetcherService.getAlbum(albumID).then(function(){
       var initialSongsLength = SongFetcherService.songs.length;
       SongFetcherService.nextSong();
       var newSongsLength = SongFetcherService.songs.length;
       expect(initialSongsLength - newSongsLength).toEqual(1);
-
       });
     });
   });
@@ -71,15 +72,24 @@ describe('test dependent on http backend CODESMELL', function() {
         expect(SongFetcherService.currentSong(songLength).previewUrl).toEqual(originalPreviewUrl + "#t=," + songLength)
       });
     });
+
+    it('invokes PreviewUrlFactory for each song requested', function() {
+      spyOn(SongFetcherService, '_newPreviewUrlFactory');
+      SongFetcherService.getAlbum(albumID).then(function(results){
+        console.log("in promise")
+        SongFetcherService.currentSong(songLength);
+        expect(SongFetcherService._newPreviewUrlFactory).toHaveBeenCalledWith(previewUrl, songLength);
+      });
+    });
   });
 });
-  describe('#appendSongLength', function() {
-    it('appends the previewUrl using the songlength argument', function() {
-    var expectedUrl = expectedResponse[0].previewUrl + "#t=," + songLength;
-    var song = SongFetcherService.appendSongLength(expectedResponse[0], songLength);
-    expect(song.previewUrl).toEqual(expectedUrl);
-    })
-  })
+  // describe('#appendSongLength', function() {
+  //   it('appends the previewUrl using the songlength argument', function() {
+  //   var expectedUrl = expectedResponse[0].previewUrl + "#t=," + songLength;
+  //   var song = SongFetcherService.appendSongLength(expectedResponse[0], songLength);
+  //   expect(song.previewUrl).toEqual(expectedUrl);
+  //   })
+  // })
 });
 
 function sorted(songs){

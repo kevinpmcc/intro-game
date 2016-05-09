@@ -1,5 +1,7 @@
 describe('SongFactory', function() {
 
+  var sf;
+
   beforeEach(module('introGame.songFactory'));
   beforeEach(inject(function(SongFactory) {
     sf = new SongFactory(song);
