@@ -1,12 +1,15 @@
 <h2>Albums page</h2>
-<div id="albums" ng-controller="AlbumController as controller">
-  <div class="list">
-  <a ng-repeat="album in controller.albums" class="item item-thumbnail-left" ng-click="controller.loadSongToGuess('{{album.albumID}}')">
-    <img src="{{ album.img_url }}">
-    <p> {{ album.title }} </p>
-    <p> {{ album.artist }} </p>
-  </a>
-</div>
+
+<div id="songs" ng-controller="AlbumController as controller">
+  <div ng-repeat="song in controller.songs">
+    <p> {{ song.title }} </p>
+    <p> {{ song.artist }} </p>
+  </div>
   <li ng-class="{active: $state.includes('song')}" class>
     <a id="song" ui-sref="song" href="#/song">Song</a>
   </li>
+
+  <p>{{ controller.introGame }}</p>
+  <button id="song-button" ng-click="controller.loadSongToGuess('10v912xgTZbjAtYfyKWJCS')">button</button>
+
+</div>
