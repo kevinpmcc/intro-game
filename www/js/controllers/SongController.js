@@ -14,4 +14,8 @@ angular.module('introGame.songController',['ui.router'])
       sound.play()
     };
 
+    self.changeToAnswerState = function(){
+      $state.go('answer', {})
+    }
+
 }]);

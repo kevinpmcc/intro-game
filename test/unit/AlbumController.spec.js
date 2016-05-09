@@ -1,7 +1,8 @@
 describe('AlbumController', function() {
   beforeEach(module('introGame.albumController'));
 
-  var SongFetcherService, stateMock;
+  var SongFetcherService;
+  var stateMock;
   var AlbumFetcherService;
   var ctrl;
   var albumID = "10v912xgTZbjAtYfyKWJCS"
