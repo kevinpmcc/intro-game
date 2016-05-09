@@ -10,7 +10,6 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory', 'introG
     };
 
     sf.appendSongLength = function(song, songLength) {
-      console.log(sf._newPreviewUrlFactory(song.previewUrl, songLength))
       song.previewUrl = sf._newPreviewUrlFactory(song.previewUrl, songLength).previewUrl
       return song;
     };

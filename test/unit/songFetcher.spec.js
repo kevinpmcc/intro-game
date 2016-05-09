@@ -19,7 +19,6 @@ describe('SongFetcherService', function() {
     SongFetcherService = _SongFetcherService_;
   }));
 
-describe('test dependent on http backend CODESMELL', function() {
   beforeEach(function(){
     httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
   });
@@ -74,22 +73,15 @@ describe('test dependent on http backend CODESMELL', function() {
     });
 
     it('invokes PreviewUrlFactory for each song requested', function() {
-      spyOn(SongFetcherService, '_newPreviewUrlFactory');
+      spyOn(SongFetcherService, '_newPreviewUrlFactory').and.callThrough();
       SongFetcherService.getAlbum(albumID).then(function(results){
-        console.log("in promise")
+        SongFetcherService.songs = sorted(SongFetcherService.songs);
         SongFetcherService.currentSong(songLength);
-        expect(SongFetcherService._newPreviewUrlFactory).toHaveBeenCalledWith(previewUrl, songLength);
+        var originalPreviewUrl = expectedResponse[1].previewUrl;
+        expect(SongFetcherService._newPreviewUrlFactory).toHaveBeenCalledWith(originalPreviewUrl, songLength);
       });
     });
   });
-});
-  // describe('#appendSongLength', function() {
-  //   it('appends the previewUrl using the songlength argument', function() {
-  //   var expectedUrl = expectedResponse[0].previewUrl + "#t=," + songLength;
-  //   var song = SongFetcherService.appendSongLength(expectedResponse[0], songLength);
-  //   expect(song.previewUrl).toEqual(expectedUrl);
-  //   })
-  // })
 });
 
 function sorted(songs){
