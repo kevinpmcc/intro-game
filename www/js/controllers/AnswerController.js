@@ -5,7 +5,8 @@ angular.module('introGame.answerController', [])
 
 
     self.currentSong = function() {
-      return SongFetcherService.currentSong;
+      return SongFetcherService.currentSong();
+      console.log('YUP')
     };
 
     self.loadSongToGuess = function() {
@@ -14,7 +15,7 @@ angular.module('introGame.answerController', [])
     };
 
 
-    self.changeToAlbumState = function() {
+    self.changeToAlbumsState = function() {
       $state.go('albums', {})
     }
 
@@ -22,8 +23,5 @@ angular.module('introGame.answerController', [])
       $state.go('song', {})
     }
 
-    self.currentSong = function() {
-      return SongFetcherService.currentSong;
-    }
 
   }])

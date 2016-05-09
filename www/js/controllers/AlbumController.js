@@ -3,28 +3,23 @@ angular.module('introGame.albumController',['ui.router'])
 
     var self = this;
 
-<<<<<<< HEAD
-    self.currentSong;
-=======
     self.albums = [];
-
->>>>>>> refactor-currentsong
 
     self.allAlbumTracks = function() {
       return SongFetcherService.songs
     }
 
     self.guessSong = function(song) {
-      if (song === self.currentSong){
+      if (song.title === SongFetcherService.currentSong().title){
         console.log('WINNER')}
+        else {
+          console.log('WRONG')
         }
+        }
+
     self.loadSongToGuess = function(albumID) {
       return SongFetcherService.getAlbum(albumID)
         .then(function() {
-<<<<<<< HEAD
-          self.currentSong = SongFetcherService.currentSong;
-=======
->>>>>>> refactor-currentsong
           self._changeToSongState();
         });
     };
@@ -57,7 +52,11 @@ angular.module('introGame.albumController',['ui.router'])
       {artist: "Arcade Fire",
       title: "Funeral",
       albumID: "0530hyl3GtZKWPebWVMZkK",
-      img_url: "https://i.scdn.co/image/0545b22a34a2399ccf000951ce7b4425c720a836"}
+      img_url: "https://i.scdn.co/image/0545b22a34a2399ccf000951ce7b4425c720a836"},
+      {artist: "Lauryn Hill",
+       title: "Miseducation of Lauryn Hill",
+       albumID: "2Uc0HAF0Cj0LAgyzYZX5e3",
+       img_url: "https://i.scdn.co/image/43660a1f9fd70e3463a782e5f7948a54f4e4cc99"}
        ];
 
        self.albums = allAlbums;
