@@ -322,23 +322,25 @@ describe("Current Angular UI router state", function () {
 
     })
 
+    it("should show the answer when the answer button is clicked", function() {
+      element(by.id('0')).click();
+      element(by.id('answer-button')).click();
+      expect(element(by.tagName('h1')).getText()).toEqual("Answer page")
+      expect(element(by.tagName('h3')).getText()).toEqual("AC/DC")
+    })
 
+    it("should return to the song state when 'play another' is clicked", function() {
+      element(by.id('0')).click();
+      element(by.id('answer-button')).click();
+      element(by.id('play-another')).click();
+      expect(element(by.tagName('h1')).getText()).toEqual("Song page")
+    })
 
+    it("should go to the album state when 'another album' is clicked", function() {
+      element(by.id('0')).click();
+      element(by.id('answer-button')).click();
+      element(by.id('new-album')).click();
+      expect(element(by.tagName('h1')).getText()).toEqual("Albums page")
+    })
 
-
-    // it("should transition from albums to answer on clicking link twice", function(){
-    //   element(by.id('0')).click()
-    //   element(by.id('answer')).click()
-    //
-    //   var currentStateName = browser.executeAsyncScript(function(callback) {
-    //     var el = document.querySelector("html");  // ng-app is defined on html element in this case
-    //     var injector = angular.element(el).injector();
-    //     var service = injector.get('$state');
-    //
-    //     callback(service.current.name);
-    //   });
-    //
-    //     expect(currentStateName).toEqual("answer");
-    //
-    // })
 });
