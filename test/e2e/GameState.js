@@ -290,9 +290,19 @@ describe("Current Angular UI router state", function () {
         expect(currentStateName).toEqual("albums");
     });
 
-    it("should transition from albums to song on clicking link", function(){
-      var el = element(by.id('song'))
-      el.click()
+
+
+    it('should display list of albums with title and band', function(){
+      var albums = element.all(by.repeater('album in controller.albums'))
+      expect(albums.count()).toEqual(6);
+      expect(albums.get(1).element(by.tagName('h3')).getText()).toEqual("Survivor")
+      expect(albums.get(1).element(by.tagName('p')).getText()).toEqual("Destiny's Child")
+    });
+
+
+    it("should transition from album to song by clicking on an album", function(){
+      element(by.id('0')).click()
+      // element(by.id('answer')).click()
 
       var currentStateName = browser.executeAsyncScript(function(callback) {
         var el = document.querySelector("html");  // ng-app is defined on html element in this case
@@ -303,42 +313,32 @@ describe("Current Angular UI router state", function () {
       });
 
         expect(currentStateName).toEqual("song");
-
+        expect(element(by.tagName('h1')).getText()).toEqual("Song page")
     })
 
-    it("should transition from albums to song on clicking button", function(){
-      element(by.id('song-button')).click();
-
-
-      var currentStateName = browser.executeAsyncScript(function(callback) {
-        var el = document.querySelector("html");  // ng-app is defined on html element in this case
-        var injector = angular.element(el).injector();
-        var service = injector.get('$state');
-
-        callback(service.current.name);
-      });
-
-      // browser.pause();
-
-        expect(currentStateName).toEqual("song");
+    it("should play a song when an album is selected and the 'play' button is clicked", function(){
+      element(by.id('0')).click();
+      element(by.id('play-button')).click();
 
     })
 
 
 
-    it("should transition from albums to answer on clicking link twice", function(){
-      element(by.id('song')).click()
-      element(by.id('answer')).click()
 
-      var currentStateName = browser.executeAsyncScript(function(callback) {
-        var el = document.querySelector("html");  // ng-app is defined on html element in this case
-        var injector = angular.element(el).injector();
-        var service = injector.get('$state');
 
-        callback(service.current.name);
-      });
-
-        expect(currentStateName).toEqual("answer");
-
-    })
+    // it("should transition from albums to answer on clicking link twice", function(){
+    //   element(by.id('0')).click()
+    //   element(by.id('answer')).click()
+    //
+    //   var currentStateName = browser.executeAsyncScript(function(callback) {
+    //     var el = document.querySelector("html");  // ng-app is defined on html element in this case
+    //     var injector = angular.element(el).injector();
+    //     var service = injector.get('$state');
+    //
+    //     callback(service.current.name);
+    //   });
+    //
+    //     expect(currentStateName).toEqual("answer");
+    //
+    // })
 });
