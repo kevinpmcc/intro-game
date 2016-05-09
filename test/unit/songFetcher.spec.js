@@ -6,6 +6,7 @@ describe('SongFetcherService', function() {
   var albumID = '10v912xgTZbjAtYfyKWJCS';
   var apiJsonResponse = getApiJsonResponse();
   var expectedResponse = getAlbumSongs();
+  var songLength = 1;
 
   beforeEach(module('introGame.SongFetcherService'));
 
@@ -15,6 +16,7 @@ describe('SongFetcherService', function() {
     SongFetcherService = _SongFetcherService_;
   }));
 
+describe('test dependent on http backend CODESMELL', function() {
   beforeEach(function(){
     httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
   });
@@ -46,14 +48,38 @@ describe('SongFetcherService', function() {
     it('pops a song from the array and stores it for use in song and answer screens', function(){
       SongFetcherService.getAlbum(albumID).then(function(){
       var initialSongsLength = SongFetcherService.songs.length;
-      SongFetcherService.songs = sorted(SongFetcherService.songs);
       SongFetcherService.nextSong();
       var newSongsLength = SongFetcherService.songs.length;
       expect(initialSongsLength - newSongsLength).toEqual(1);
-      expect(SongFetcherService.currentSong.title).toEqual(expectedResponse[1].title)
+
       });
     });
   });
+
+  describe('#currentSong', function(){
+    it('returns the last song in the songs array', function() {
+      SongFetcherService.getAlbum(albumID).then(function(){
+        SongFetcherService.songs = sorted(SongFetcherService.songs);
+        expect(SongFetcherService.currentSong().title).toEqual(expectedResponse[1].title)
+      });
+    });
+
+    it('updates the previewURL with the desired duration', function() {
+      SongFetcherService.getAlbum(albumID).then(function(){
+        SongFetcherService.songs = sorted(SongFetcherService.songs);
+        var originalPreviewUrl = expectedResponse[1].previewUrl;
+        expect(SongFetcherService.currentSong(songLength).previewUrl).toEqual(originalPreviewUrl + "#t=," + songLength)
+      });
+    });
+  });
+});
+  describe('#appendSongLength', function() {
+    it('appends the previewUrl using the songlength argument', function() {
+    var expectedUrl = expectedResponse[0].previewUrl + "#t=," + songLength;
+    var song = SongFetcherService.appendSongLength(expectedResponse[0], songLength);
+    expect(song.previewUrl).toEqual(expectedUrl);
+    })
+  })
 });
 
 function sorted(songs){
@@ -67,10 +93,10 @@ function _sortObjectArray(a, b){
 function getAlbumSongs(){
   return  [ {"artist" : "AC/DC",
                   "title" : "Beating Around the Bush",
-                  "previewUrl" : "https://p.scdn.co/mp3-preview/2577c8d371ab4ef3b253f0638ca85155c1fdc495#t=,1"},
+                  "previewUrl" : "https://p.scdn.co/mp3-preview/2577c8d371ab4ef3b253f0638ca85155c1fdc495"},
                   {"artist" : "AC/DC",
                    "title" : "Walk All over You",
-                  "previewUrl" : "https://p.scdn.co/mp3-preview/2577c8d371ab4ef3b253f0638ca85155c1fdc495#t=,1"}];
+                  "previewUrl" : "https://p.scdn.co/mp3-preview/82bdae1a32ffd4bee3ea4b270687922286b50a3f"}];
 };
 
 function getApiJsonResponse(){
