@@ -18,6 +18,5 @@ angular.module('introGame.routing', ['ui.router'])
       .state('answer', {
         url: '/answer',
         templateUrl: 'views/partials/answer.html'
-
       })
     })

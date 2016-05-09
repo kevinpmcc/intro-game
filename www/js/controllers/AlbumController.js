@@ -56,7 +56,12 @@ angular.module('introGame.albumController',['ui.router'])
       {artist: "Lauryn Hill",
        title: "Miseducation of Lauryn Hill",
        albumID: "2Uc0HAF0Cj0LAgyzYZX5e3",
-       img_url: "https://i.scdn.co/image/43660a1f9fd70e3463a782e5f7948a54f4e4cc99"}
+       img_url: "https://i.scdn.co/image/43660a1f9fd70e3463a782e5f7948a54f4e4cc99"},
+       {artist: "Daft Punk",
+       title: "Discovery",
+       albumID: "2noRn2Aes5aoNVsU6iWThc",
+       img_url: "https://i.scdn.co/image/1a9dab25976c706fffccb6bf2cf8a6f5eadd0d29"
+        }
        ];
 
        self.albums = allAlbums;
