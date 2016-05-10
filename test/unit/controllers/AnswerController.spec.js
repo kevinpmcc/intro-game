@@ -45,7 +45,10 @@ describe('AnswerController', function () {
     });
   });
 
-  describe('#isLastSong', function() {
-    it('call SongFetcherService.songs()')
-  })
+  describe('#isGameEnd', function() {
+    it('calls SongFetcherService.songs()', function() {
+      ctrl.isGameEnd();
+      expect(SongFetcherService.isGameEnd).toHaveBeenCalled();
+    });
+  });
 });
