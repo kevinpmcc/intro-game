@@ -11,6 +11,9 @@ describe('SongFetcherService', function() {
   var previewUrl = "https://p.scdn.co/mp3-preview/2577c8d371ab4ef3b253f0638ca85155c1fdc495"
   var song1 = {title: "Walk All over You"};
   var song2 = {title: "Highway to Hell"};
+  var clipDuration1 = 1;
+  var clipDuration3 = 3;
+  var clipDuration5 = 5;
 
   beforeEach(module('introGame.SongFetcherService'));
 
@@ -41,6 +44,14 @@ describe('SongFetcherService', function() {
         SongFetcherService.songs.push(song1);
       }
       expect(SongFetcherService.isGameEnd()).toEqual(false);
+    })
+  })
+
+  describe('#resetMaxCliplength', function(){
+    it('sets maxClipLength to zero', function(){
+      SongFetcherService.maxClipLength = 5;
+      SongFetcherService.resetMaxCliplength();
+      expect(SongFetcherService.maxClipLength).toEqual(0);
     })
   })
 
@@ -98,13 +109,23 @@ describe('SongFetcherService', function() {
     describe('#nextSong', function(){
       it('pops a song from the array and stores it for use in song and answer screens', function(){
         SongFetcherService.getAlbum(albumID).then(function(){
-        var initialSongsLength = SongFetcherService.songs.length;
-        SongFetcherService.nextSong();
-        var newSongsLength = SongFetcherService.songs.length;
-        expect(initialSongsLength - newSongsLength).toEqual(1);
+          var initialSongsLength = SongFetcherService.songs.length;
+          SongFetcherService.nextSong();
+          var newSongsLength = SongFetcherService.songs.length;
+          expect(initialSongsLength - newSongsLength).toEqual(1);
+        });
+      });
+
+      it('calls SongFetcherService.resetMaxCliplength', function(){
+        spyOn(SongFetcherService,'resetMaxCliplength')
+        SongFetcherService.getAlbum(albumID).then(function(){
+          SongFetcherService.nextSong();
+          expect(SongFetcherService.resetMaxCliplength).toHaveBeenCalled();
         });
       });
     });
+
+
 
     describe('#currentSong', function(){
       it('returns the last song in the songs array', function() {
@@ -113,6 +134,15 @@ describe('SongFetcherService', function() {
           expect(SongFetcherService.currentSong().title).toEqual(expectedResponse[1].title)
         });
       });
+
+      it('stores the maximum song length for a song in sf.maxClipLength', function(){
+        SongFetcherService.getAlbum(albumID).then(function(){
+          SongFetcherService.currentSong(clipDuration5);
+          SongFetcherService.currentSong(clipDuration1);
+          SongFetcherService.currentSong(clipDuration3);
+          expect(SongFetcherService.maxClipLength).toEqual(clipDuration5)
+        })
+      })
 
       it('updates the previewURL with the desired duration', function() {
         SongFetcherService.getAlbum(albumID).then(function(){

@@ -3,7 +3,9 @@
 </ion-header-bar>
 <ion-content>
   <div id="songs" ng-controller="SongController as controller">
-    <button id="play-button" class="button" ng-click="controller.playCurrentSong()">Play</button>
+    <button id="play-button-1" class="button" ng-click="controller.playCurrentSong(1)">Play 1s</button>
+    <button id="play-button-3" class="button" ng-click="controller.playCurrentSong(3)">Play 3s</button>
+    <button id="play-button-5" class="button" ng-click="controller.playCurrentSong(5)">Play 5s</button>
     <a ng-repeat="song in controller.remainingSongs()" class="item" ng-click="controller.guessSong(song)">
       <p>{{ song.title }}</p>
     </a>

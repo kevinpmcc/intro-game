@@ -4,11 +4,17 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory', 'introG
 
     sf.songs = [];
     sf.storedGuess;
+    sf.maxClipLength = 0;
 
     sf.currentSong = function(songLength) {
+      sf.maxClipLength = (songLength > sf.maxClipLength) ? songLength : sf.maxClipLength
       var song = sf.songs[sf.songs.length - 1];
       return sf.appendSongLength(song, songLength);
     };
+
+    sf.resetMaxCliplength = function(){
+      sf.maxClipLength = 0;
+    }
 
     sf.isGameEnd = function() {
       return sf.songs.length < 3;
@@ -47,6 +53,7 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory', 'introG
       }
 
       sf.nextSong = function(){
+        sf.resetMaxCliplength();
         sf.songs.pop();
       }
 

@@ -318,7 +318,7 @@ describe("Current Angular UI router state", function () {
 
     it("plays a song when an album is selected and the 'play' button is clicked", function(){
       element(by.id('0')).click();
-      element(by.id('play-button')).click();
+      element(by.id('play-button-1')).click();
 
     })
 
@@ -356,25 +356,5 @@ describe("Current Angular UI router state", function () {
       expect(element(by.id('play-another')).isPresent()).toEqual(false);
     })
 
-    // it("should show the answer when the answer button is clicked", function() {
-    //   element(by.id('0')).click();
-    //   element(by.id('answer-button')).click();
-    //   expect(element(by.tagName('h1')).getText()).toEqual("Answer page")
-    //   expect(element(by.tagName('h3')).getText()).toEqual("AC/DC")
-    // })
-    //
-    // it("should return to the song state when 'play another' is clicked", function() {
-    //   element(by.id('0')).click();
-    //   element(by.id('answer-button')).click();
-    //   element(by.id('play-another')).click();
-    //   expect(element(by.tagName('h1')).getText()).toEqual("Song page")
-    // })
-
-    // it("should go to the album state when 'another album' is clicked", function() {
-    //   element(by.id('0')).click();
-    //   element(by.id('answer-button')).click();
-    //   element(by.id('new-album')).click();
-    //   expect(element(by.tagName('h1')).getText()).toEqual("Albums page")
-    // })
 
 });
