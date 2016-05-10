@@ -8,6 +8,7 @@ describe('SongController', function() {
   var stateMock;
   var song1 = {title: "song1"};
   var song2 = {title: "song2"};
+  var clipDuration = 3;
 
   beforeEach(inject(function($rootScope, $controller) {
     SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['currentSong', 'remainingSongs', 'storeGuess']);
@@ -25,15 +26,6 @@ describe('SongController', function() {
     });
   }));
 
-  it('calls SongFetcherService.currentSong with default SONGLENGTH', function() {
-    ctrl.loadCurrentSong();
-    expect(SongFetcherService.currentSong).toHaveBeenCalledWith(ctrl.SONGLENGTH);
-  });
-
-  it('has default SONGLENGTH of 1', function () {
-    expect(ctrl.SONGLENGTH).toEqual(1);
-  });
-
   describe('#playCurrentSong', function(){
 
     it('plays song', function(){
@@ -41,6 +33,11 @@ describe('SongController', function() {
       expect(ngAudio.load).toHaveBeenCalled()
       expect(sound.play).toHaveBeenCalled();
     });
+
+    it('passes the clip duration to SongFetcherService.currentSong', function(){
+      ctrl.playCurrentSong(clipDuration);
+      expect(SongFetcherService.currentSong).toHaveBeenCalledWith(clipDuration);
+    })
   })
 
   describe('#changeToAnswerState', function() {
