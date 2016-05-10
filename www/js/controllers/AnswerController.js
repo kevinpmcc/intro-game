@@ -16,12 +16,16 @@ angular.module('introGame.answerController', [])
       $state.go('song', {})
     };
 
+    self.totalScore = function() {
+      return SongFetcherService.totalScore
+    }
+
     self.isCorrectGuess = function() {
-      console.log(SongFetcherService.isCorrectGuess())
       return SongFetcherService.isCorrectGuess()
     }
 
     self.changeToAlbumsState = function(){
+      SongFetcherService.resetScore();
       $state.go('albums', {})
     };
 
