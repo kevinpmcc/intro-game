@@ -10,8 +10,10 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory', 'introG
     };
 
     sf.remainingSongs = function() {
-      var sortedSongs = sf.songs.slice[0];
-      console.log(sortedSongs)
+      var sortedSongs = [];
+      for(var i in sf.songs) {
+        sortedSongs[i] = sf.songs[i]
+      }
       return _sorted(sortedSongs);
     }
 

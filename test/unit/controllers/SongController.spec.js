@@ -6,10 +6,12 @@ describe('SongController', function() {
   var ctrl;
   var sound;
   var stateMock;
+  var song1 = {title: "song1"};
+  var song2 = {title: "song2"};
 
   beforeEach(inject(function($rootScope, $controller) {
     SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['currentSong', 'remainingSongs']);
-    SongFetcherService.currentSong.and.returnValue("song1");
+    SongFetcherService.currentSong.and.returnValue(song1);
     sound = jasmine.createSpyObj('sound', ['play']);
     stateMock = jasmine.createSpyObj('$state spy', ['go']);
     ngAudio = jasmine.createSpyObj('ngAudio',['load']);
@@ -41,15 +43,26 @@ describe('SongController', function() {
     });
   })
 
-  it('calls ctrl.changeToSongState', function() {
-    ctrl.changeToAnswerState();
-    expect(stateMock.go).toHaveBeenCalledWith('answer',{});
+  describe('#changeToAnswerState', function() {
+    it('calls ctrl.changeToAnswerState', function() {
+      ctrl.changeToAnswerState();
+      expect(stateMock.go).toHaveBeenCalledWith('answer',{});
+    })
+  });
+
+  describe('#remainingSongs', function() {
+    it('returns all unplayed tracks', function(){
+      ctrl.remainingSongs()
+      expect(SongFetcherService.remainingSongs).toHaveBeenCalled();
+    })
+  });
+
+  describe('#isCorrectGuess', function() {
+    it('returns if guess is correct', function(){
+      expect(ctrl.isCorrectGuess(song1)).toEqual(true)
+      expect(ctrl.isCorrectGuess(song2)).toEqual(false)
+    })
   })
 
-  it('returns all unplayed tracks', function(){
-    ctrl.remainingSongs()
-    expect(SongFetcherService.remainingSongs).toHaveBeenCalled();
-
-  })
 
 })

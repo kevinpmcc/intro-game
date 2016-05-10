@@ -324,40 +324,45 @@ describe("Current Angular UI router state", function () {
 
     it('displays a list of possible answers for the song played', function(){
       element(by.id('0')).click();
-      browser.pause();
       var tracks = element.all(by.repeater('song in controller.remainingSongs()'))
       expect(tracks.count()).toEqual(10);
       expect(tracks.get(1).element(by.tagName('p')).getText()).toEqual("Get It Hot")
       expect(tracks.get(2).element(by.tagName('p')).getText()).toEqual("Girls Got Rhythm")
     })
 
-    xit('transitions to answer page when song name clicked', function(){
+    it('transitions to answer page when song name clicked', function(){
       element(by.id('0')).click();
       var tracks = element.all(by.repeater('song in controller.remainingSongs()'))
-      expect(tracks.count()).toEqual(10);
-      expect(tracks.get(1).element(by.tagName('p')).getText()).toEqual("Get It Hot")
-      expect(tracks.get(2).element(by.tagName('p')).getText()).toEqual("Girls Got Rhythm")
-    })
-
-    it("should show the answer when the answer button is clicked", function() {
-      element(by.id('0')).click();
-      element(by.id('answer-button')).click();
+      tracks.get(2).element(by.tagName('p')).click()
       expect(element(by.tagName('h1')).getText()).toEqual("Answer page")
-      expect(element(by.tagName('h3')).getText()).toEqual("AC/DC")
     })
 
-    it("should return to the song state when 'play another' is clicked", function() {
+    it('informs the user if guess is correct', function() {
       element(by.id('0')).click();
-      element(by.id('answer-button')).click();
-      element(by.id('play-another')).click();
-      expect(element(by.tagName('h1')).getText()).toEqual("Song page")
+      var tracks = element.all(by.repeater('song in controller.remainingSongs()'))
+      tracks.get(2).element(by.tagName('p')).click()
+      // expect(element(by.tagName('h1')).getText()).toEqual("Answer page")
     })
 
-    it("should go to the album state when 'another album' is clicked", function() {
-      element(by.id('0')).click();
-      element(by.id('answer-button')).click();
-      element(by.id('new-album')).click();
-      expect(element(by.tagName('h1')).getText()).toEqual("Albums page")
-    })
+    // it("should show the answer when the answer button is clicked", function() {
+    //   element(by.id('0')).click();
+    //   element(by.id('answer-button')).click();
+    //   expect(element(by.tagName('h1')).getText()).toEqual("Answer page")
+    //   expect(element(by.tagName('h3')).getText()).toEqual("AC/DC")
+    // })
+    //
+    // it("should return to the song state when 'play another' is clicked", function() {
+    //   element(by.id('0')).click();
+    //   element(by.id('answer-button')).click();
+    //   element(by.id('play-another')).click();
+    //   expect(element(by.tagName('h1')).getText()).toEqual("Song page")
+    // })
+
+    // it("should go to the album state when 'another album' is clicked", function() {
+    //   element(by.id('0')).click();
+    //   element(by.id('answer-button')).click();
+    //   element(by.id('new-album')).click();
+    //   expect(element(by.tagName('h1')).getText()).toEqual("Albums page")
+    // })
 
 });
