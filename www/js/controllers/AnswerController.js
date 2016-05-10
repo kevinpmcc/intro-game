@@ -25,5 +25,9 @@ angular.module('introGame.answerController', [])
       $state.go('albums', {})
     };
 
+    self.isGameEnd = function() {
+      return SongFetcherService.isGameEnd()
+    }
+
 
 }]);

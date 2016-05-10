@@ -10,6 +10,9 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory', 'introG
       return sf.appendSongLength(song, songLength);
     };
 
+    sf.isGameEnd = function() {
+      return sf.songs.length < 3;
+    }
 
     sf.remainingSongs = function() {
       var sortedSongs = [];

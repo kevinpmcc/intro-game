@@ -4,7 +4,7 @@ describe('AnswerController', function () {
   var ctrl;
 
   beforeEach(inject(function($controller){
-    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['nextSong', 'currentSong', 'isCorrectGuess']);
+    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['nextSong', 'currentSong', 'isCorrectGuess', 'isGameEnd']);
     stateMock = jasmine.createSpyObj('$state spy', ['go']);
     ctrl = $controller('AnswerController', { SongFetcherService: SongFetcherService,
     $state: stateMock

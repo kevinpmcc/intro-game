@@ -28,6 +28,22 @@ describe('SongFetcherService', function() {
     });
   })
 
+  describe('#isGameEnd', function() {
+    it('returns true when there are two or fewer songs remaining', function() {
+      for(var i = 0; i < 2; i++) {
+        SongFetcherService.songs.push(song1);
+      }
+      expect(SongFetcherService.isGameEnd()).toEqual(true);
+    })
+
+    it('returns false when there are more than two songs remaining', function() {
+      for(var i = 0; i < 3; i++) {
+        SongFetcherService.songs.push(song1);
+      }
+      expect(SongFetcherService.isGameEnd()).toEqual(false);
+    })
+  })
+
   describe('using API', function () {
     beforeEach(function(){
       httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
