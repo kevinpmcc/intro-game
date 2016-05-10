@@ -10,7 +10,7 @@ describe('SongController', function() {
   var song2 = {title: "song2"};
 
   beforeEach(inject(function($rootScope, $controller) {
-    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['currentSong', 'remainingSongs']);
+    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['currentSong', 'remainingSongs', 'storeGuess']);
     SongFetcherService.currentSong.and.returnValue(song1);
     sound = jasmine.createSpyObj('sound', ['play']);
     stateMock = jasmine.createSpyObj('$state spy', ['go']);
@@ -57,12 +57,19 @@ describe('SongController', function() {
     })
   });
 
-  describe('#isCorrectGuess', function() {
-    it('returns if guess is correct', function(){
-      expect(ctrl.isCorrectGuess(song1)).toEqual(true)
-      expect(ctrl.isCorrectGuess(song2)).toEqual(false)
+  describe('#guessSong', function() {
+    it('calls SongFetcherService.storeGuess with song', function(){
+      ctrl.guessSong(song1)
+      expect(SongFetcherService.storeGuess).toHaveBeenCalledWith(song1);
     })
-  })
+
+    it('calls ctrl.changeToAnswerState', function() {
+      ctrl.guessSong(song1);
+      expect(stateMock.go).toHaveBeenCalledWith('answer',{});
+    })
+
+
+  });
 
 
 })

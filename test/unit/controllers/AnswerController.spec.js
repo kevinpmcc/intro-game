@@ -4,13 +4,19 @@ describe('AnswerController', function () {
   var ctrl;
 
   beforeEach(inject(function($controller){
-    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['nextSong', 'currentSong']);
+    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['nextSong', 'currentSong', 'isCorrectGuess']);
     stateMock = jasmine.createSpyObj('$state spy', ['go']);
     ctrl = $controller('AnswerController', { SongFetcherService: SongFetcherService,
     $state: stateMock
   });
 }));
 
+  describe('#isCorrectGuess', function() {
+    it('calls SongFetcherService.isCorrectGuess', function() {
+      ctrl.isCorrectGuess()
+      expect(SongFetcherService.isCorrectGuess).toHaveBeenCalled();
+    })
+  })
   describe('#currentSong', function() {
     it('calls songFetcherService.currentSong', function() {
       ctrl.currentSong()
@@ -38,4 +44,8 @@ describe('AnswerController', function () {
       expect(stateMock.go).toHaveBeenCalledWith('albums',{});
     });
   });
+
+  describe('#isLastSong', function() {
+    it('call SongFetcherService.songs()')
+  })
 });

@@ -341,6 +341,7 @@ describe("Current Angular UI router state", function () {
       element(by.id('0')).click();
       var tracks = element.all(by.repeater('song in controller.remainingSongs()'))
       tracks.get(2).element(by.tagName('p')).click()
+      expect(element(by.tagName('h2')).getText()).toContain("orrect")
       // expect(element(by.tagName('h1')).getText()).toEqual("Answer page")
     })
 

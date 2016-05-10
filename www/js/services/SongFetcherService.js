@@ -3,11 +3,13 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory', 'introG
     var sf = this;
 
     sf.songs = [];
+    sf.storedGuess;
 
     sf.currentSong = function(songLength) {
       var song = sf.songs[sf.songs.length - 1];
       return sf.appendSongLength(song, songLength);
     };
+
 
     sf.remainingSongs = function() {
       var sortedSongs = [];
@@ -45,6 +47,17 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory', 'introG
         sf.songs.pop();
       }
 
+      sf.isCorrectGuess = function() {
+        return sf.storedGuess.title === sf.currentSong().title
+      }
+
+      sf.storeGuess = function(song) {
+        sf.storedGuess = song
+      }
+
+      sf.guessedSong = function() {
+        return sf.storedGuess
+      }
 
       function _sorted(songs){
         return songs.sort(_sortObjectArray);

@@ -22,8 +22,9 @@ angular.module('introGame.songController',['ui.router'])
       return SongFetcherService.remainingSongs();
     }
 
-    self.isCorrectGuess = function(song) {
-      return song.title === SongFetcherService.currentSong().title
+    self.guessSong = function(song) {
+      SongFetcherService.storeGuess(song)
+      self.changeToAnswerState();
     }
 
 }]);

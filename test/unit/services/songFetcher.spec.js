@@ -9,6 +9,8 @@ describe('SongFetcherService', function() {
   var expectedResponse = getAlbumSongs();
   var songLength = 1;
   var previewUrl = "https://p.scdn.co/mp3-preview/2577c8d371ab4ef3b253f0638ca85155c1fdc495"
+  var song1 = {title: "Walk All over You"};
+  var song2 = {title: "Highway to Hell"};
 
   beforeEach(module('introGame.SongFetcherService'));
 
@@ -19,76 +21,99 @@ describe('SongFetcherService', function() {
     SongFetcherService = _SongFetcherService_;
   }));
 
-  beforeEach(function(){
-    httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
-  });
+  describe('#storeGuess', function() {
+    it('stores the current guessed song', function() {
+      SongFetcherService.storeGuess(song1);
+      expect(SongFetcherService.guessedSong()).toEqual(song1)
+    });
+  })
 
-  afterEach(function(){
-    httpBackend.flush();
-  });
-
-  describe('#getAlbum', function(){
-
-    it('retrieves data from API and stores in an array of song objects', function(){
-      SongFetcherService.getAlbum(albumID).then(function(){
-        expect(sorted(SongFetcherService.songs)[0].artist).toEqual(expectedResponse[0].artist);
-        expect(sorted(SongFetcherService.songs)[0].title).toEqual(expectedResponse[0].title);
-        expect(sorted(SongFetcherService.songs)[0].previewUrl).toEqual(expectedResponse[0].previewUrl);
-      });
+  describe('using API', function () {
+    beforeEach(function(){
+      httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
     });
 
-    it('invokes SongFactory for each song returned by API ', function() {
-      spyOn(SongFetcherService, '_newSongFactory');
-      SongFetcherService.getAlbum(albumID).then(function(results){
-        expect(SongFetcherService._newSongFactory.calls.count()).toEqual(10);
-      });
+    afterEach(function(){
+      httpBackend.flush();
     });
-  });
 
-
-  describe('#remainingSongs', function(){
-    it('returns all unplayed songs in song array', function(){
-      SongFetcherService.getAlbum(albumID).then(function(){
-        expect(SongFetcherService.remainingSongs().length).toEqual(10);
+    describe('#isCorrectGuess', function() {
+      it('returns if guess is correct', function(){
+        SongFetcherService.getAlbum(albumID).then(function(){
+          SongFetcherService.songs = sorted(SongFetcherService.songs);
+          SongFetcherService.storeGuess(song1);
+          expect(SongFetcherService.isCorrectGuess()).toEqual(true)
+          SongFetcherService.storeGuess(song2);
+          expect(SongFetcherService.isCorrectGuess()).toEqual(false)
+        });
       })
     })
 
-  })
 
-  describe('#nextSong', function(){
-    it('pops a song from the array and stores it for use in song and answer screens', function(){
-      SongFetcherService.getAlbum(albumID).then(function(){
-      var initialSongsLength = SongFetcherService.songs.length;
-      SongFetcherService.nextSong();
-      var newSongsLength = SongFetcherService.songs.length;
-      expect(initialSongsLength - newSongsLength).toEqual(1);
+
+    describe('#getAlbum', function(){
+
+      it('retrieves data from API and stores in an array of song objects', function(){
+        SongFetcherService.getAlbum(albumID).then(function(){
+          expect(sorted(SongFetcherService.songs)[0].artist).toEqual(expectedResponse[0].artist);
+          expect(sorted(SongFetcherService.songs)[0].title).toEqual(expectedResponse[0].title);
+          expect(sorted(SongFetcherService.songs)[0].previewUrl).toEqual(expectedResponse[0].previewUrl);
+        });
       });
-    });
-  });
 
-  describe('#currentSong', function(){
-    it('returns the last song in the songs array', function() {
-      SongFetcherService.getAlbum(albumID).then(function(){
-        SongFetcherService.songs = sorted(SongFetcherService.songs);
-        expect(SongFetcherService.currentSong().title).toEqual(expectedResponse[1].title)
-      });
-    });
-
-    it('updates the previewURL with the desired duration', function() {
-      SongFetcherService.getAlbum(albumID).then(function(){
-        SongFetcherService.songs = sorted(SongFetcherService.songs);
-        var originalPreviewUrl = expectedResponse[1].previewUrl;
-        expect(SongFetcherService.currentSong(songLength).appendedPreviewUrl).toEqual(originalPreviewUrl + "#t=," + songLength)
+      it('invokes SongFactory for each song returned by API ', function() {
+        spyOn(SongFetcherService, '_newSongFactory');
+        SongFetcherService.getAlbum(albumID).then(function(results){
+          expect(SongFetcherService._newSongFactory.calls.count()).toEqual(10);
+        });
       });
     });
 
-    it('invokes PreviewUrlFactory for each song requested', function() {
-      spyOn(SongFetcherService, '_newPreviewUrlFactory').and.callThrough();
-      SongFetcherService.getAlbum(albumID).then(function(results){
-        SongFetcherService.songs = sorted(SongFetcherService.songs);
-        SongFetcherService.currentSong(songLength);
-        var originalPreviewUrl = expectedResponse[1].previewUrl;
-        expect(SongFetcherService._newPreviewUrlFactory).toHaveBeenCalledWith(originalPreviewUrl, songLength);
+
+    describe('#remainingSongs', function(){
+      it('returns all unplayed songs in song array', function(){
+        SongFetcherService.getAlbum(albumID).then(function(){
+          expect(SongFetcherService.remainingSongs().length).toEqual(10);
+        })
+      })
+
+    })
+
+    describe('#nextSong', function(){
+      it('pops a song from the array and stores it for use in song and answer screens', function(){
+        SongFetcherService.getAlbum(albumID).then(function(){
+        var initialSongsLength = SongFetcherService.songs.length;
+        SongFetcherService.nextSong();
+        var newSongsLength = SongFetcherService.songs.length;
+        expect(initialSongsLength - newSongsLength).toEqual(1);
+        });
+      });
+    });
+
+    describe('#currentSong', function(){
+      it('returns the last song in the songs array', function() {
+        SongFetcherService.getAlbum(albumID).then(function(){
+          SongFetcherService.songs = sorted(SongFetcherService.songs);
+          expect(SongFetcherService.currentSong().title).toEqual(expectedResponse[1].title)
+        });
+      });
+
+      it('updates the previewURL with the desired duration', function() {
+        SongFetcherService.getAlbum(albumID).then(function(){
+          SongFetcherService.songs = sorted(SongFetcherService.songs);
+          var originalPreviewUrl = expectedResponse[1].previewUrl;
+          expect(SongFetcherService.currentSong(songLength).appendedPreviewUrl).toEqual(originalPreviewUrl + "#t=," + songLength)
+        });
+      });
+
+      it('invokes PreviewUrlFactory for each song requested', function() {
+        spyOn(SongFetcherService, '_newPreviewUrlFactory').and.callThrough();
+        SongFetcherService.getAlbum(albumID).then(function(results){
+          SongFetcherService.songs = sorted(SongFetcherService.songs);
+          SongFetcherService.currentSong(songLength);
+          var originalPreviewUrl = expectedResponse[1].previewUrl;
+          expect(SongFetcherService._newPreviewUrlFactory).toHaveBeenCalledWith(originalPreviewUrl, songLength);
+        });
       });
     });
   });
