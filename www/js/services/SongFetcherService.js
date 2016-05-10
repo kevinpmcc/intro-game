@@ -7,6 +7,9 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory', 'introG
     sf.maxClipLength = 0;
     sf.totalScore = 0;
 
+    sf.resetScore = function() {
+      sf.totalScore = 0;
+    }
     sf.fetchTotalScore = function() {
       return sf.totalScore;
     }
@@ -80,10 +83,6 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory', 'introG
       }
 
       sf.calculateScore = function() {
-        console.log("CALCULATE SCORE")
-        console.log(sf.totalScore)
-        console.log(sf.isCorrectGuess())
-        console.log(sf.songScore())
         return sf.totalScore += sf.songScore()
 
       }

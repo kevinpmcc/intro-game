@@ -24,9 +24,18 @@ describe('SongFetcherService', function() {
     SongFetcherService = _SongFetcherService_;
   }));
 
+  describe('#resetScore', function() {
+    it('resets score to 0', function() {
+      SongFetcherService.totalScore = 10
+      SongFetcherService.resetScore()
+      expect(SongFetcherService.totalScore).toEqual(0)
+    })
+  })
+
   describe('#storeGuessAndCalculate', function() {
     it('calls on SongFetcherService.storeGuess', function() {
       spyOn(SongFetcherService,'storeGuess')
+      spyOn(SongFetcherService,'calculateScore')
       SongFetcherService.storeGuessAndCalculate(song1)
       expect(SongFetcherService.storeGuess).toHaveBeenCalledWith(song1);
     })

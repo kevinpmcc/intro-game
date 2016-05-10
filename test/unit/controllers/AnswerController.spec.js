@@ -4,7 +4,7 @@ describe('AnswerController', function () {
   var ctrl;
 
   beforeEach(inject(function($controller){
-    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['nextSong', 'currentSong', 'isCorrectGuess', 'isGameEnd', 'fetchTotalScore']);
+    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['nextSong', 'currentSong', 'isCorrectGuess', 'isGameEnd', 'fetchTotalScore', 'resetScore']);
     stateMock = jasmine.createSpyObj('$state spy', ['go']);
     ctrl = $controller('AnswerController', { SongFetcherService: SongFetcherService,
     $state: stateMock
@@ -42,6 +42,11 @@ describe('AnswerController', function () {
     it('calls state.go with albums', function() {
       ctrl.changeToAlbumsState()
       expect(stateMock.go).toHaveBeenCalledWith('albums',{});
+    });
+
+    it('calls state.go with albums', function() {
+      ctrl.changeToAlbumsState()
+      expect(SongFetcherService.resetScore).toHaveBeenCalledWith();
     });
   });
 

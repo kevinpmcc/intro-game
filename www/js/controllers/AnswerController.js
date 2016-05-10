@@ -20,11 +20,11 @@ angular.module('introGame.answerController', [])
     };
 
     self.isCorrectGuess = function() {
-      console.log(SongFetcherService.isCorrectGuess())
       return SongFetcherService.isCorrectGuess()
     }
 
     self.changeToAlbumsState = function(){
+      SongFetcherService.resetScore()
       $state.go('albums', {})
     };
 
