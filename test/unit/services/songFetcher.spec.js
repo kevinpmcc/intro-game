@@ -45,6 +45,16 @@ describe('SongFetcherService', function() {
     });
   });
 
+
+  describe('#remainingSongs', function(){
+    it('returns all unplayed songs in song array', function(){
+      SongFetcherService.getAlbum(albumID).then(function(){
+        expect(SongFetcherService.remainingSongs().length).toEqual(10);
+      })
+    })
+
+  })
+
   describe('#nextSong', function(){
     it('pops a song from the array and stores it for use in song and answer screens', function(){
       SongFetcherService.getAlbum(albumID).then(function(){

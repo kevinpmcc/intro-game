@@ -8,7 +8,7 @@ describe('SongController', function() {
   var stateMock;
 
   beforeEach(inject(function($rootScope, $controller) {
-    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['currentSong']);
+    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['currentSong', 'remainingSongs']);
     SongFetcherService.currentSong.and.returnValue("song1");
     sound = jasmine.createSpyObj('sound', ['play']);
     stateMock = jasmine.createSpyObj('$state spy', ['go']);
@@ -46,6 +46,10 @@ describe('SongController', function() {
     expect(stateMock.go).toHaveBeenCalledWith('answer',{});
   })
 
+  it('returns all unplayed tracks', function(){
+    ctrl.remainingSongs()
+    expect(SongFetcherService.remainingSongs).toHaveBeenCalled();
 
+  })
 
 })

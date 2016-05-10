@@ -9,6 +9,12 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory', 'introG
       return sf.appendSongLength(song, songLength);
     };
 
+    sf.remainingSongs = function() {
+      var sortedSongs = sf.songs.slice[0];
+      console.log(sortedSongs)
+      return _sorted(sortedSongs);
+    }
+
     sf.appendSongLength = function(song, songLength) {
       song.appendedPreviewUrl = sf._newPreviewUrlFactory(song.previewUrl, songLength).previewUrl
       return song;
@@ -35,6 +41,15 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory', 'introG
 
       sf.nextSong = function(){
         sf.songs.pop();
+      }
+
+
+      function _sorted(songs){
+        return songs.sort(_sortObjectArray);
+      }
+
+      function _sortObjectArray(a, b){
+        return Number(a.title > b.title);
       }
 
       function shuffle(array) {
