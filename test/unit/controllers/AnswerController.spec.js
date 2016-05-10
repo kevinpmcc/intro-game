@@ -4,7 +4,7 @@ describe('AnswerController', function () {
   var ctrl;
 
   beforeEach(inject(function($controller){
-    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['nextSong', 'currentSong', 'isCorrectGuess', 'isGameEnd']);
+    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['nextSong', 'currentSong', 'isCorrectGuess', 'isGameEnd', 'fetchTotalScore']);
     stateMock = jasmine.createSpyObj('$state spy', ['go']);
     ctrl = $controller('AnswerController', { SongFetcherService: SongFetcherService,
     $state: stateMock
@@ -51,4 +51,11 @@ describe('AnswerController', function () {
       expect(SongFetcherService.isGameEnd).toHaveBeenCalled();
     });
   });
+
+  describe('#totalScore', function() {
+    it('calls SongFetcherService.fetchTotalScore()', function(){
+      ctrl.totalScore();
+      expect(SongFetcherService.fetchTotalScore).toHaveBeenCalled();
+    })
+  })
 });

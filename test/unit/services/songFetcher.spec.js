@@ -24,6 +24,23 @@ describe('SongFetcherService', function() {
     SongFetcherService = _SongFetcherService_;
   }));
 
+  describe('#storeGuessAndCalculate', function() {
+    it('calls on SongFetcherService.storeGuess', function() {
+      spyOn(SongFetcherService,'storeGuess')
+      SongFetcherService.storeGuessAndCalculate(song1)
+      expect(SongFetcherService.storeGuess).toHaveBeenCalledWith(song1);
+    })
+
+    it('calls on SongFetcherService.calculateScore', function() {
+      spyOn(SongFetcherService,'calculateScore')
+      SongFetcherService.storeGuessAndCalculate(song1)
+      expect(SongFetcherService.calculateScore).toHaveBeenCalled;
+
+    })
+  })
+
+
+
   describe('#storeGuess', function() {
     it('stores the current guessed song', function() {
       SongFetcherService.storeGuess(song1);
@@ -62,6 +79,31 @@ describe('SongFetcherService', function() {
 
     afterEach(function(){
       httpBackend.flush();
+    });
+
+    describe('#calculateScore', function() {
+      it('calculates Score', function() {
+        console.log("FUKCY")
+        SongFetcherService.getAlbum(albumID).then(function(){
+          SongFetcherService.songs = sorted(SongFetcherService.songs);
+          SongFetcherService.currentSong(clipDuration3);
+          SongFetcherService.storeGuess(song1);
+
+          expect(SongFetcherService.calculateScore()).toEqual(3)
+        });
+      })
+    });
+
+    describe('#songScore', function() {
+      it('returns value of guess', function() {
+        console.log("songscorespec")
+        SongFetcherService.getAlbum(albumID).then(function(){
+          SongFetcherService.songs = sorted(SongFetcherService.songs);
+          SongFetcherService.currentSong(clipDuration3);
+          SongFetcherService.storeGuess(song1);
+          expect(SongFetcherService.songScore()).toEqual(3)
+        });
+      })
     });
 
     describe('#isCorrectGuess', function() {

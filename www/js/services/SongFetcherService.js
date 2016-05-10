@@ -5,6 +5,20 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory', 'introG
     sf.songs = [];
     sf.storedGuess;
     sf.maxClipLength = 0;
+    sf.totalScore = 0;
+
+    sf.fetchTotalScore = function() {
+      return sf.totalScore;
+    }
+
+    sf.songScore = function() {
+      if (sf.isCorrectGuess()) {
+        return 6 - sf.maxClipLength
+      }
+      else {
+        return 0
+      }
+    };
 
     sf.currentSong = function(songLength) {
       sf.maxClipLength = (songLength > sf.maxClipLength) ? songLength : sf.maxClipLength
@@ -65,9 +79,22 @@ angular.module('introGame.SongFetcherService', ['introGame.songFactory', 'introG
         sf.storedGuess = song
       }
 
+      sf.calculateScore = function() {
+        console.log("CALCULATE SCORE")
+        console.log(sf.totalScore)
+        console.log(sf.isCorrectGuess())
+        console.log(sf.songScore())
+        return sf.totalScore += sf.songScore()
+
+      }
       sf.guessedSong = function() {
         return sf.storedGuess
       }
+
+      sf.storeGuessAndCalculate = function(song){
+        sf.storeGuess(song)
+        sf.calculateScore()
+      };
 
       function _sorted(songs){
         return songs.sort(_sortObjectArray);
