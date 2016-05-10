@@ -18,4 +18,13 @@ angular.module('introGame.songController',['ui.router'])
       $state.go('answer', {})
     }
 
+    self.remainingSongs = function(){
+      return SongFetcherService.remainingSongs();
+    }
+
+    self.guessSong = function(song) {
+      SongFetcherService.storeGuess(song)
+      self.changeToAnswerState();
+    }
+
 }]);

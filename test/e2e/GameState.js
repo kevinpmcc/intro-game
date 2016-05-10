@@ -279,7 +279,7 @@ describe("Current Angular UI router state", function () {
       mock.teardown();
     });
 
-    it("should get the current state", function (){
+    it("returns the current state", function (){
       var currentStateName = browser.executeAsyncScript(function(callback) {
         var el = document.querySelector("html");  // ng-app is defined on html element in this case
         var injector = angular.element(el).injector();
@@ -292,7 +292,7 @@ describe("Current Angular UI router state", function () {
 
 
 
-    it('should display list of albums with title and band', function(){
+    it('displays list of albums with title and band', function(){
       var albums = element.all(by.repeater('album in controller.albums'))
       expect(albums.count()).toEqual(6);
       expect(albums.get(1).element(by.tagName('h3')).getText()).toEqual("Survivor")
@@ -300,7 +300,7 @@ describe("Current Angular UI router state", function () {
     });
 
 
-    it("should transition from album to song by clicking on an album", function(){
+    it("transitions from album to song by clicking on an album", function(){
       element(by.id('0')).click()
       // element(by.id('answer')).click()
 
@@ -316,31 +316,54 @@ describe("Current Angular UI router state", function () {
         expect(element(by.tagName('h1')).getText()).toEqual("Song page")
     })
 
-    it("should play a song when an album is selected and the 'play' button is clicked", function(){
+    it("plays a song when an album is selected and the 'play' button is clicked", function(){
       element(by.id('0')).click();
       element(by.id('play-button')).click();
 
     })
 
-    it("should show the answer when the answer button is clicked", function() {
+    it('displays a list of possible answers for the song played', function(){
       element(by.id('0')).click();
-      element(by.id('answer-button')).click();
+      var tracks = element.all(by.repeater('song in controller.remainingSongs()'))
+      expect(tracks.count()).toEqual(10);
+      expect(tracks.get(1).element(by.tagName('p')).getText()).toEqual("Get It Hot")
+      expect(tracks.get(2).element(by.tagName('p')).getText()).toEqual("Girls Got Rhythm")
+    })
+
+    it('transitions to answer page when song name clicked', function(){
+      element(by.id('0')).click();
+      var tracks = element.all(by.repeater('song in controller.remainingSongs()'))
+      tracks.get(2).element(by.tagName('p')).click()
       expect(element(by.tagName('h1')).getText()).toEqual("Answer page")
-      expect(element(by.tagName('h3')).getText()).toEqual("AC/DC")
     })
 
-    it("should return to the song state when 'play another' is clicked", function() {
+    it('informs the user if guess is correct', function() {
       element(by.id('0')).click();
-      element(by.id('answer-button')).click();
-      element(by.id('play-another')).click();
-      expect(element(by.tagName('h1')).getText()).toEqual("Song page")
+      var tracks = element.all(by.repeater('song in controller.remainingSongs()'))
+      tracks.get(2).element(by.tagName('p')).click()
+      expect(element(by.tagName('h2')).getText()).toContain("orrect")
+      // expect(element(by.tagName('h1')).getText()).toEqual("Answer page")
     })
 
-    it("should go to the album state when 'another album' is clicked", function() {
-      element(by.id('0')).click();
-      element(by.id('answer-button')).click();
-      element(by.id('new-album')).click();
-      expect(element(by.tagName('h1')).getText()).toEqual("Albums page")
-    })
+    // it("should show the answer when the answer button is clicked", function() {
+    //   element(by.id('0')).click();
+    //   element(by.id('answer-button')).click();
+    //   expect(element(by.tagName('h1')).getText()).toEqual("Answer page")
+    //   expect(element(by.tagName('h3')).getText()).toEqual("AC/DC")
+    // })
+    //
+    // it("should return to the song state when 'play another' is clicked", function() {
+    //   element(by.id('0')).click();
+    //   element(by.id('answer-button')).click();
+    //   element(by.id('play-another')).click();
+    //   expect(element(by.tagName('h1')).getText()).toEqual("Song page")
+    // })
+
+    // it("should go to the album state when 'another album' is clicked", function() {
+    //   element(by.id('0')).click();
+    //   element(by.id('answer-button')).click();
+    //   element(by.id('new-album')).click();
+    //   expect(element(by.tagName('h1')).getText()).toEqual("Albums page")
+    // })
 
 });
