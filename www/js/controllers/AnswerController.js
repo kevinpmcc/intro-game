@@ -3,17 +3,19 @@ angular.module('introGame.answerController',[])
                                  'SongsService',
                                  'GameLogicService',
                                  'CurrentSongService',
+                                 'PlayLogService',
                                  '$state',
                                  function(SongFetcherService,
                                           SongsService,
                                           GameLogicService,
                                           CurrentSongService,
+                                          PlayLogService,
                                           $state) {
 
     var self = this;
 
     self.totalScore = function() {
-      return SongFetcherService.fetchTotalScore();
+      return PlayLogService.totalScore();
     }
 
     self.currentSong = function() {
@@ -31,7 +33,7 @@ angular.module('introGame.answerController',[])
     };
 
     self.isCorrectGuess = function() {
-      return SongFetcherService.isCorrectGuess()
+      return PlayLogService.isLastGuessCorrect()
     }
 
     self.changeToAlbumsState = function(){

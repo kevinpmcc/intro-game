@@ -1,9 +1,10 @@
-angular.module('introGame.albumController',['ui.router'])
+angular.module('introGame.albumController',['ui.router', 'introGame.playLogService'])
   .controller('AlbumController', ['SongsService',
                                   'AlbumFetcherService',
                                   'GameLogicService',
+                                  'PlayLogService',
                                   '$state',
-                                  function(SongsService, AlbumFetcherService, GameLogicService, $state) {
+                                  function(SongsService, AlbumFetcherService, GameLogicService, PlayLogService, $state) {
 
     var self = this;
 
@@ -20,6 +21,7 @@ angular.module('introGame.albumController',['ui.router'])
       return SongsService.getAlbum(albumID)
         .then(function() {
           GameLogicService.newGame();
+          PlayLogService.newGame();
           self._changeToSongState();
         });
     };

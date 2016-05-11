@@ -7,6 +7,7 @@ angular.module('introGame.playFactory', [])
       this.duration = duration;
       this.score = 0;
       this.guess = undefined;
+      this.correctGuess = false;
     };
     return createPlay;
   });

@@ -12,6 +12,7 @@ describe('PlayFactory', function() {
     expect(pf.duration).toEqual(DURATION);
     expect(pf.score).toEqual(0);
     expect(pf.guess).toEqual(undefined);
+    expect(pf.correctGuess).toEqual(false);
   });
 
 });

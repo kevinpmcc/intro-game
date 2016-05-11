@@ -1,5 +1,5 @@
-angular.module('introGame.playLogService', ['introGame.playFactory'])
-  .service('PlayLogService', ['PlayFactory', function(PlayFactory) {
+angular.module('introGame.playLogService', ['introGame.playFactory', 'introGame.songsService'])
+  .service('PlayLogService', ['PlayFactory','SongsService', function(PlayFactory, SongsService) {
 
     var self = this;
 
@@ -11,6 +11,7 @@ angular.module('introGame.playLogService', ['introGame.playFactory'])
       } else {
         self.plays[turnNumber].duration = duration
       }
+      // console.log(self.plays);
     }
 
     self.guess = function(turnNumber, guessedSong) {
@@ -19,6 +20,21 @@ angular.module('introGame.playLogService', ['introGame.playFactory'])
       }
       self.plays[turnNumber].guess = guessedSong;
       _evaluateGuess(turnNumber);
+      // console.log(self.plays);
+    }
+
+    self.isLastGuessCorrect = function(){
+      return self.plays[self.plays.length - 1].correctGuess;
+    }
+
+    self.newGame = function(){
+      self.plays = [];
+    }
+
+    self.totalScore = function(){
+      return self.plays.reduce(function(total, currentPlay){
+        return total + currentPlay.score;
+      }, 0)
     }
 
     function _evaluateGuess(turnNumber) {
@@ -26,8 +42,7 @@ angular.module('introGame.playLogService', ['introGame.playFactory'])
       var currentPlay = self.plays[turnNumber];
       if(currentPlay.guess.title === currentSongTitle) {
         currentPlay.score = 6 - currentPlay.duration;
-      } else {
-        currentPlay.score = 0
+        currentPlay.correctGuess = true;
       }
     }
 

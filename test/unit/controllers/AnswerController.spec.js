@@ -5,13 +5,14 @@ describe('AnswerController', function () {
   var SongFetcherService;
   var CurrentSongService;
   var SongsService;
+  var PlayLogService;
   var GameLogicService;
   var TURN_NUMBER = 5;
 
 
   beforeEach(inject(function($controller){
     SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['nextSong', 'currentSong', 'isCorrectGuess', 'isGameEnd', 'fetchTotalScore', 'resetScore']);
-
+    PlayLogService = jasmine.createSpyObj('PlayLogService', ['isLastGuessCorrect', 'totalScore'])
     SongsService = jasmine.createSpyObj('SongsService', ['getAlbum', 'nextSong']);
     GameLogicService = jasmine.createSpyObj('GameLogicService', ['getCurrentTurnNumber', 'isGameEnd', 'nextTurn'])
     GameLogicService.getCurrentTurnNumber.and.returnValue(TURN_NUMBER)
@@ -23,16 +24,17 @@ describe('AnswerController', function () {
       SongsService: SongsService,
       GameLogicService: GameLogicService,
       CurrentSongService: CurrentSongService,
+      PlayLogService: PlayLogService,
       $state: stateMock
     });
   }));
 
-  // describe('#isCorrectGuess', function() {
-  //   it('calls SongFetcherService.isCorrectGuess', function() {
-  //     ctrl.isCorrectGuess()
-  //     expect(SongFetcherService.isCorrectGuess).toHaveBeenCalled();
-  //   })
-  // })
+  describe('#isCorrectGuess', function() {
+    it('calls PlayLogService.isLastGuessCorrect', function() {
+      ctrl.isCorrectGuess()
+      expect(PlayLogService.isLastGuessCorrect).toHaveBeenCalled();
+    })
+  })
   describe('#currentSong', function() {
     it('calls songFetcherService.currentSong', function() {
       ctrl.currentSong()
@@ -73,10 +75,10 @@ describe('AnswerController', function () {
     });
   });
 
-  // describe('#totalScore', function() {
-  //   it('calls SongFetcherService.fetchTotalScore()', function(){
-  //     ctrl.totalScore();
-  //     expect(SongFetcherService.fetchTotalScore).toHaveBeenCalled();
-  //   })
-  // })
+  describe('#totalScore', function() {
+    it('calls PlayLogService.totalScore()', function(){
+      ctrl.totalScore();
+      expect(PlayLogService.totalScore).toHaveBeenCalled();
+    })
+  })
 });
