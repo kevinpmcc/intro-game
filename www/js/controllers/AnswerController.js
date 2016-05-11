@@ -1,4 +1,4 @@
-angular.module('introGame.answerController', [])
+  angular.module('introGame.answerController', [])
   .controller('AnswerController', ['SongFetcherService', '$state', function(SongFetcherService, $state) {
     var self = this;
 
