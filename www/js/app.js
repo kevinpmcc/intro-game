@@ -4,8 +4,12 @@ angular.module('introGame.app', ['ionic',
                                 'introGame.albumController',
                                 'introGame.songController',
                                 'introGame.answerController',
-                                'introGame.SongFetcherService',
+                                'introGame.songsService',
+                                'introGame.currentSongService',
+                                'introGame.gameLogicService',
+                                'introGame.playLogService',
                                 'introGame.songFactory',
+                                'introGame.playFactory',
                                 'introGame.previewUrlFactory',
                                 'introGame.albumFetcherService'])
 

@@ -1,14 +1,27 @@
 angular.module('introGame.songController',['ui.router'])
-  .controller('SongController', ['SongFetcherService', '$state', 'ngAudio', function(SongFetcherService, $state, ngAudio) {
+  .controller('SongController', ['SongsService',
+                                 'GameLogicService',
+                                 'CurrentSongService',
+                                 'PlayLogService',
+                                 '$state',
+                                 'ngAudio',
+                                 function(SongsService,
+                                          GameLogicService,
+                                          CurrentSongService,
+                                          PlayLogService,
+                                          $state, ngAudio) {
 
     var self = this;
 
     self.loadCurrentSong = function(duration) {
-      return SongFetcherService.currentSong(duration);
+      var currentTurn = GameLogicService.getCurrentTurnNumber();
+      return CurrentSongService.currentSongPreviewUrl(currentTurn, duration);
     }
 
     self.playCurrentSong = function(duration){
-      var sound = ngAudio.load(self.loadCurrentSong(duration).appendedPreviewUrl);
+      var sound = ngAudio.load(self.loadCurrentSong(duration));
+      var currentTurn = GameLogicService.getCurrentTurnNumber();
+      PlayLogService.listen(currentTurn, duration)
       sound.play()
     };
 
@@ -17,11 +30,13 @@ angular.module('introGame.songController',['ui.router'])
     }
 
     self.remainingSongs = function(){
-      return SongFetcherService.remainingSongs();
+      var currentTurn = GameLogicService.getCurrentTurnNumber();
+      return CurrentSongService.sortedRemainingSongs(currentTurn);
     }
 
     self.guessSong = function(song) {
-      SongFetcherService.storeGuessAndCalculate(song)
+      var currentTurn = GameLogicService.getCurrentTurnNumber();
+      PlayLogService.guess(currentTurn, song)
       self.changeToAnswerState();
     }
 

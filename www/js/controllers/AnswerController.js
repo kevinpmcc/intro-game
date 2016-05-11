@@ -1,17 +1,28 @@
-angular.module('introGame.answerController', [])
-  .controller('AnswerController', ['SongFetcherService', '$state', function(SongFetcherService, $state) {
+angular.module('introGame.answerController',[])
+  .controller('AnswerController', ['SongsService',
+                                 'GameLogicService',
+                                 'CurrentSongService',
+                                 'PlayLogService',
+                                 '$state',
+                                 function(SongsService,
+                                          GameLogicService,
+                                          CurrentSongService,
+                                          PlayLogService,
+                                          $state) {
+
     var self = this;
 
     self.totalScore = function() {
-      return SongFetcherService.fetchTotalScore();
+      return PlayLogService.totalScore();
     }
 
     self.currentSong = function() {
-      return SongFetcherService.currentSong();
+      var currentTurn = GameLogicService.getCurrentTurnNumber();
+      return CurrentSongService.currentSong(currentTurn);
     };
 
-    self.loadSongToGuess = function() {
-      SongFetcherService.nextSong();
+    self.nextTurn = function() {
+      GameLogicService.nextTurn();
       self._changeToSongState();
     };
 
@@ -20,16 +31,15 @@ angular.module('introGame.answerController', [])
     };
 
     self.isCorrectGuess = function() {
-      return SongFetcherService.isCorrectGuess()
+      return PlayLogService.isLastGuessCorrect()
     }
 
     self.changeToAlbumsState = function(){
-      SongFetcherService.resetScore()
       $state.go('albums', {})
     };
 
     self.isGameEnd = function() {
-      return SongFetcherService.isGameEnd()
+      return GameLogicService.isGameEnd()
     }
 
 

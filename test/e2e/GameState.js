@@ -357,7 +357,7 @@ describe("Current Angular UI router state", function () {
     it('hides the play another song button if there are not enough songs remaining', function() {
       element(by.id('0')).click();
       var tracks = element.all(by.repeater('song in controller.remainingSongs()'))
-      for(var i = 0; i < 8; i++) {
+      for(var i = 0; i < 9; i++) {
         tracks.get(0).element(by.tagName('p')).click()
         element(by.id('play-another')).click()
       }
