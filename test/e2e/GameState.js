@@ -347,9 +347,11 @@ describe("Current Angular UI router state", function () {
 
     it('displays the score to the user', function() {
       element(by.id('0')).click();
+      element(by.id('play-button-1')).click();
       var tracks = element.all(by.repeater('song in controller.remainingSongs()'))
+
       tracks.get(2).element(by.tagName('p')).click()
-      expect(element(by.tagName('h5')).getText()).not.toBeGreaterThan(5);
+      expect(element(by.tagName('h5')).getText()).toEqual('0');
     })
 
     it('hides the play another song button if there are not enough songs remaining', function() {
