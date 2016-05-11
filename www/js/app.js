@@ -8,7 +8,9 @@ angular.module('introGame.app', ['ionic',
                                 'introGame.songsService',
                                 'introGame.currentSongService',
                                 'introGame.gameLogicService',
+                                'introGame.playLogService',
                                 'introGame.songFactory',
+                                'introGame.playFactory',
                                 'introGame.previewUrlFactory',
                                 'introGame.albumFetcherService'])
 

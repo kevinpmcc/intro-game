@@ -21,8 +21,8 @@ angular.module('introGame.answerController',[])
       return CurrentSongService.currentSong(currentTurn);
     };
 
-    self.loadSongToGuess = function() {
-      SongFetcherService.nextSong();
+    self.nextTurn = function() {
+      GameLogicService.nextTurn();
       self._changeToSongState();
     };
 
@@ -35,12 +35,11 @@ angular.module('introGame.answerController',[])
     }
 
     self.changeToAlbumsState = function(){
-      SongFetcherService.resetScore()
       $state.go('albums', {})
     };
 
     self.isGameEnd = function() {
-      return SongFetcherService.isGameEnd()
+      return GameLogicService.isGameEnd()
     }
 
 

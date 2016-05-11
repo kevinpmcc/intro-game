@@ -13,7 +13,7 @@ describe('AnswerController', function () {
     SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['nextSong', 'currentSong', 'isCorrectGuess', 'isGameEnd', 'fetchTotalScore', 'resetScore']);
 
     SongsService = jasmine.createSpyObj('SongsService', ['getAlbum', 'nextSong']);
-    GameLogicService = jasmine.createSpyObj('GameLogicService', ['getCurrentTurnNumber'])
+    GameLogicService = jasmine.createSpyObj('GameLogicService', ['getCurrentTurnNumber', 'isGameEnd', 'nextTurn'])
     GameLogicService.getCurrentTurnNumber.and.returnValue(TURN_NUMBER)
     CurrentSongService = jasmine.createSpyObj('CurrentSongService', ['currentSongPreviewUrl', 'currentSong', 'sortedRemainingSongs'])
 
@@ -40,40 +40,39 @@ describe('AnswerController', function () {
       expect(CurrentSongService.currentSong).toHaveBeenCalledWith(TURN_NUMBER);
     });
   });
-  //
-  // describe('#loadSongToGuess', function() {
-  //   beforeEach(function(){
-  //     ctrl.loadSongToGuess();
-  //   });
-  //
-  //   it('calls songFetcherService.nextSong', function() {
-  //     expect(SongFetcherService.nextSong).toHaveBeenCalled();
-  //   });
-  //
-  //   it('calls state.go with song', function() {
-  //     expect(stateMock.go).toHaveBeenCalledWith('song',{});
-  //   });
-  // });
-  //
-  // describe('#changeToAlbumsState', function() {
-  //   it('calls state.go with albums', function() {
-  //     ctrl.changeToAlbumsState()
-  //     expect(stateMock.go).toHaveBeenCalledWith('albums',{});
-  //   });
-  //
-  //   it('calls state.go with albums', function() {
-  //     ctrl.changeToAlbumsState()
-  //     expect(SongFetcherService.resetScore).toHaveBeenCalledWith();
-  //   });
-  // });
-  //
-  // describe('#isGameEnd', function() {
-  //   it('calls SongFetcherService.songs()', function() {
-  //     ctrl.isGameEnd();
-  //     expect(SongFetcherService.isGameEnd).toHaveBeenCalled();
-  //   });
-  // });
-  //
+
+  describe('#loadSongToGuess', function() {
+    beforeEach(function(){
+      ctrl.nextTurn();
+    });
+
+    it('calls songFetcherService.nextSong', function() {
+      expect(GameLogicService.nextTurn).toHaveBeenCalled();
+    });
+
+    it('calls state.go with song', function() {
+      expect(stateMock.go).toHaveBeenCalledWith('song',{});
+    });
+  });
+
+  describe('#changeToAlbumsState', function() {
+    beforeEach(function() {
+      ctrl.changeToAlbumsState()
+    });
+
+    it('calls state.go with albums', function() {
+      expect(stateMock.go).toHaveBeenCalledWith('albums',{});
+    });
+
+  });
+
+  describe('#isGameEnd', function() {
+    it('calls SongFetcherService.songs()', function() {
+      ctrl.isGameEnd();
+      expect(GameLogicService.isGameEnd).toHaveBeenCalled();
+    });
+  });
+
   // describe('#totalScore', function() {
   //   it('calls SongFetcherService.fetchTotalScore()', function(){
   //     ctrl.totalScore();

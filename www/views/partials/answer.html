@@ -9,7 +9,7 @@
     <h3>{{ controller.currentSong().artist }}</h3>
     <p>{{ controller.currentSong().title }}</p>
     <h5>{{ controller.totalScore() }}</h5>
-    <button id="play-another" class="button" ng-if="!controller.isGameEnd()" ng-click="controller.loadSongToGuess()">Play another song</button>
+    <button id="play-another" class="button" ng-if="!controller.isGameEnd()" ng-click="controller.nextTurn()">Play another song</button>
     <button id="new-album" class="button" ng-click="controller.changeToAlbumsState()">New album</button>
   </div>
 </ion-content>

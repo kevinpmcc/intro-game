@@ -3,15 +3,11 @@ angular.module('introGame.gameLogicService', ['introGame.songsService'])
     var self = this;
 
     self.turnsInGame;
-
     self.turnNumber;
 
-
     self.isGameEnd = function() {
-      return self.turnNumber === self.turnsInGame;
+      return self.turnNumber >= self.turnsInGame - 1;
     }
-
-
 
     self.nextTurn = function() {
       self.turnNumber += 1;

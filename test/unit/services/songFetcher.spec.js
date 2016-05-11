@@ -92,7 +92,6 @@ describe('SongFetcherService', function() {
 
     describe('#calculateScore', function() {
       it('calculates Score', function() {
-        console.log("FUKCY")
         SongFetcherService.getAlbum(albumID).then(function(){
           SongFetcherService.songs = sorted(SongFetcherService.songs);
           SongFetcherService.currentSong(clipDuration3);
@@ -105,7 +104,6 @@ describe('SongFetcherService', function() {
 
     describe('#songScore', function() {
       it('returns value of guess', function() {
-        console.log("songscorespec")
         SongFetcherService.getAlbum(albumID).then(function(){
           SongFetcherService.songs = sorted(SongFetcherService.songs);
           SongFetcherService.currentSong(clipDuration3);

@@ -80,12 +80,12 @@ describe('#isGameEnd', function() {
     GameLogicService.turnsInGame = TURNS_IN_GAME;
   })
   it('detects end of game', function(){
-    GameLogicService.turnNumber = TURNS_IN_GAME;
+    GameLogicService.turnNumber = TURNS_IN_GAME - 1;
     expect(GameLogicService.isGameEnd()).toEqual(true);
   })
 
   it('detects when not end of game', function(){
-    GameLogicService.turnNumber = TURNS_IN_GAME - 1;
+    GameLogicService.turnNumber = TURNS_IN_GAME - 2;
     expect(GameLogicService.isGameEnd()).toEqual(false);
   })
 })
