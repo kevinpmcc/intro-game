@@ -2,9 +2,21 @@ describe('AnswerController', function () {
   beforeEach(module('introGame.answerController'));
 
   var ctrl;
+  var SongFetcherService;
+  var CurrentSongService;
+  var SongsService;
+  var GameLogicService;
+  var TURN_NUMBER = 5;
+
 
   beforeEach(inject(function($controller){
     SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['nextSong', 'currentSong', 'isCorrectGuess', 'isGameEnd', 'fetchTotalScore', 'resetScore']);
+
+    SongsService = jasmine.createSpyObj('SongsService', ['getAlbum', 'nextSong']);
+    GameLogicService = jasmine.createSpyObj('GameLogicService', ['getCurrentTurnNumber'])
+    GameLogicService.getCurrentTurnNumber.and.returnValue(TURN_NUMBER)
+    CurrentSongService = jasmine.createSpyObj('CurrentSongService', ['currentSongPreviewUrl', 'sortedRemainingSongs'])
+
     stateMock = jasmine.createSpyObj('$state spy', ['go']);
     ctrl = $controller('AnswerController', { SongFetcherService: SongFetcherService,
     $state: stateMock

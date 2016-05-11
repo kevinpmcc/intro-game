@@ -8,6 +8,10 @@ angular.module('introGame.currentSongService', ['introGame.songsService'])
       return song.previewUrl + URL_APPEND_STRING + duration;
     }
 
+    self.currentSong = function(turnNumber) {
+      return SongsService.getSongAtPosition(turnNumber);
+    }
+    
     self.sortedRemainingSongs = function(turnNumber){
       allSongs = SongsService.getAllSongs();
       return _sorted(allSongs.filter(function(currentValue, index){

@@ -1,13 +1,25 @@
-  angular.module('introGame.answerController', [])
-  .controller('AnswerController', ['SongFetcherService', '$state', function(SongFetcherService, $state) {
+angular.module('introGame.answerController',[])
+  .controller('AnswerController', ['SongFetcherService',
+                                 'SongsService',
+                                 'GameLogicService',
+                                 'CurrentSongService',
+                                 '$state',
+                                 function(SongFetcherService,
+                                          SongsService,
+                                          GameLogicService,
+                                          CurrentSongService,
+                                          $state) {
+
     var self = this;
+
 
     self.totalScore = function() {
       return SongFetcherService.fetchTotalScore();
     }
 
     self.currentSong = function() {
-      return SongFetcherService.currentSong();
+      var currentTurn = GameLogicService.getCurrentTurnNumber();
+      return CurrentSongService.currentSong(currentTurn);
     };
 
     self.loadSongToGuess = function() {
