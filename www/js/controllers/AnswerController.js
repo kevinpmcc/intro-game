@@ -12,7 +12,6 @@ angular.module('introGame.answerController',[])
 
     var self = this;
 
-
     self.totalScore = function() {
       return SongFetcherService.fetchTotalScore();
     }
