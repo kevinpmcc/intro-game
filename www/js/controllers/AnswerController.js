@@ -2,6 +2,9 @@ angular.module('introGame.answerController', [])
   .controller('AnswerController', ['SongFetcherService', '$state', function(SongFetcherService, $state) {
     var self = this;
 
+    self.totalScore = function() {
+      return SongFetcherService.fetchTotalScore();
+    }
 
     self.currentSong = function() {
       return SongFetcherService.currentSong();
@@ -17,11 +20,11 @@ angular.module('introGame.answerController', [])
     };
 
     self.isCorrectGuess = function() {
-      console.log(SongFetcherService.isCorrectGuess())
       return SongFetcherService.isCorrectGuess()
     }
 
     self.changeToAlbumsState = function(){
+      SongFetcherService.resetScore()
       $state.go('albums', {})
     };
 

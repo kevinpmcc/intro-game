@@ -21,7 +21,7 @@ angular.module('introGame.songController',['ui.router'])
     }
 
     self.guessSong = function(song) {
-      SongFetcherService.storeGuess(song)
+      SongFetcherService.storeGuessAndCalculate(song)
       self.changeToAnswerState();
     }
 

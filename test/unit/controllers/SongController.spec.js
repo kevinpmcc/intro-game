@@ -11,7 +11,7 @@ describe('SongController', function() {
   var clipDuration = 3;
 
   beforeEach(inject(function($rootScope, $controller) {
-    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['currentSong', 'remainingSongs', 'storeGuess']);
+    SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['currentSong', 'remainingSongs', 'storeGuessAndCalculate']);
     SongFetcherService.currentSong.and.returnValue(song1);
     sound = jasmine.createSpyObj('sound', ['play']);
     stateMock = jasmine.createSpyObj('$state spy', ['go']);
@@ -55,9 +55,9 @@ describe('SongController', function() {
   });
 
   describe('#guessSong', function() {
-    it('calls SongFetcherService.storeGuess with song', function(){
+    it('calls SongFetcherService.storeGuessandCalculate with song', function(){
       ctrl.guessSong(song1)
-      expect(SongFetcherService.storeGuess).toHaveBeenCalledWith(song1);
+      expect(SongFetcherService.storeGuessAndCalculate).toHaveBeenCalledWith(song1);
     })
 
     it('calls ctrl.changeToAnswerState', function() {
