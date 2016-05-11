@@ -11,7 +11,6 @@ angular.module('introGame.playLogService', ['introGame.playFactory', 'introGame.
       } else {
         self.plays[turnNumber].duration = duration
       }
-      // console.log(self.plays);
     }
 
     self.guess = function(turnNumber, guessedSong) {
@@ -20,7 +19,6 @@ angular.module('introGame.playLogService', ['introGame.playFactory', 'introGame.
       }
       self.plays[turnNumber].guess = guessedSong;
       _evaluateGuess(turnNumber);
-      // console.log(self.plays);
     }
 
     self.isLastGuessCorrect = function(){
@@ -45,5 +43,4 @@ angular.module('introGame.playLogService', ['introGame.playFactory', 'introGame.
         currentPlay.correctGuess = true;
       }
     }
-
   }])

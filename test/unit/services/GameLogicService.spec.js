@@ -11,20 +11,6 @@ describe('GameLogicService', function() {
     SongsService = _SongsService_
   }));
 
-
-// guessing
-// scoring
-// preparing list of songs to answer
-// managing position of current song
-// describe('#setTurnsInGame', function() {
-//   it('sets number of turns in game', function() {
-//     spyOn(SongsService, 'getNumberOfSongs').and.returnValue(TURNS_IN_GAME)
-//     GameLogicService.setTurnsInGame();
-//     expect(GameLogicService.turnsInGame).toEqual(TURNS_IN_GAME)
-//     expect(SongsService.getNumberOfSongs).toHaveBeenCalled();
-//   })
-// })
-
 describe('#nextTurn', function() {
   it('increments the turn number by 1', function() {
     GameLogicService.turnNumber = 0;
@@ -50,25 +36,6 @@ describe('#newGame', function() {
   })
 })
 
-it('checks whether the guess is correct', function(){
-
-})
-
-it('calculates the turn score based on the guess', function(){
-
-})
-
-it('maintains the total score for a single game', function(){
-
-})
-
-it('resets score to zero on new game', function(){
-
-})
-
-it('maintains the position of the current song in the game', function(){
-
-})
 describe ('#getCurrentTurnNumber', function() {
   it('returns the current turn number', function() {
     GameLogicService.turnNumber = 3;
