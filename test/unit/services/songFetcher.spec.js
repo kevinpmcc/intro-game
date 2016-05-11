@@ -15,7 +15,7 @@ describe('SongFetcherService', function() {
   var clipDuration3 = 3;
   var clipDuration5 = 5;
 
-  beforeEach(module('introGame.SongFetcherService'));
+  beforeEach(module('introGame.songFetcherService'));
 
   beforeEach(inject(function(_SongFetcherService_, _SongFactory_, _PreviewUrlFactory_, $httpBackend, $rootScope, $q) {
     SongFactory = _SongFactory_;

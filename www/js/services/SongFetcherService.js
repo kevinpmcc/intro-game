@@ -1,4 +1,4 @@
-angular.module('introGame.SongFetcherService', ['introGame.songFactory', 'introGame.previewUrlFactory'])
+angular.module('introGame.songFetcherService', ['introGame.songFactory', 'introGame.previewUrlFactory'])
   .service('SongFetcherService', ['$http', 'SongFactory', 'PreviewUrlFactory', function($http, SongFactory, PreviewUrlFactory){
     var sf = this;
 

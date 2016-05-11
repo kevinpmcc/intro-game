@@ -1,5 +1,9 @@
 angular.module('introGame.albumController',['ui.router'])
-  .controller('AlbumController', ['SongFetcherService', 'AlbumFetcherService', '$state', function(SongFetcherService, AlbumFetcherService, $state) {
+  .controller('AlbumController', ['SongsService',
+                                  'AlbumFetcherService',
+                                  'GameLogicService',
+                                  '$state',
+                                  function(SongsService, AlbumFetcherService, GameLogicService, $state) {
 
     var self = this;
 
@@ -13,8 +17,9 @@ angular.module('introGame.albumController',['ui.router'])
     };
 
     self.loadSongToGuess = function(albumID) {
-      return SongFetcherService.getAlbum(albumID)
+      return SongsService.getAlbum(albumID)
         .then(function() {
+          GameLogicService.newGame();
           self._changeToSongState();
         });
     };
