@@ -1,11 +1,9 @@
 angular.module('introGame.answerController',[])
-  .controller('AnswerController', ['SongsService',
-                                 'GameLogicService',
+  .controller('AnswerController', ['GameLogicService',
                                  'CurrentSongService',
                                  'PlayLogService',
                                  '$state',
-                                 function(SongsService,
-                                          GameLogicService,
+                                 function(GameLogicService,
                                           CurrentSongService,
                                           PlayLogService,
                                           $state) {

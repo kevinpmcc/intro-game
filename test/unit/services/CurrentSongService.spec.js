@@ -1,6 +1,9 @@
 describe('CurrentSongService', function() {
 
   var CurrentSongService;
+  var SongsService;
+  var ngAudio;
+  var sound;
   var BOGUS_SONGS = [{title: 2},{title: 8},{title: 5},{title: 7},{title: 1},
                      {title: 4},{title: 9},{title: 6},{title: 10},{title: 3}];
 
@@ -8,24 +11,43 @@ describe('CurrentSongService', function() {
   var DURATION = 3;
   var PREVIEW_URL = "URL"
   var URL_APPEND_STRING = "#t=,"
-  var song = {previewUrl: PREVIEW_URL};
+  var SONG = {previewUrl: PREVIEW_URL};
 
   beforeEach(module('introGame.currentSongService'))
 
-  beforeEach(inject(function(_CurrentSongService_, _SongsService_){
-
-
-
+  beforeEach(inject(function(_CurrentSongService_, _SongsService_, _ngAudio_){
+    sound = jasmine.createSpyObj('sound', ['play']);
+    ngAudio = _ngAudio_;
     CurrentSongService = _CurrentSongService_;
     SongsService = _SongsService_;
   }));
 
   describe('#currentSongPreviewUrl', function() {
     it('returns song with appropriate clip length', function() {
-      spyOn(SongsService, 'getSongAtPosition').and.returnValue(song)
+      spyOn(SongsService, 'getSongAtPosition').and.returnValue(SONG)
       expect(CurrentSongService.currentSongPreviewUrl(TURN_NUMBER, DURATION)).toEqual(PREVIEW_URL + URL_APPEND_STRING + DURATION)
     });
   });
+
+
+  describe('#playCurrentSong', function(){
+    beforeEach(function(){
+      spyOn(SongsService, 'getSongAtPosition').and.returnValue(SONG);
+      spyOn(ngAudio, 'load').and.returnValue(sound);
+    })
+
+    it('plays song', function(){
+      CurrentSongService.playCurrentSong();
+      expect(ngAudio.load).toHaveBeenCalled()
+      expect(sound.play).toHaveBeenCalled();
+    });
+
+    it('passes the clip duration to SongFetcherService.currentSong', function(){
+      spyOn(CurrentSongService, 'currentSongPreviewUrl')
+      CurrentSongService.playCurrentSong(TURN_NUMBER, DURATION);
+      expect(CurrentSongService.currentSongPreviewUrl).toHaveBeenCalledWith(TURN_NUMBER, DURATION);
+    })
+  })
 
   describe('#sortedRemainingSongs', function(){
 

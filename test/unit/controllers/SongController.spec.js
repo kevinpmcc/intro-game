@@ -1,7 +1,6 @@
 describe('SongController', function() {
   beforeEach(module('introGame.songController'));
 
-  // var SongFetcherService;
   var CurrentSongService;
   var SongsService;
   var GameLogicService;
@@ -16,8 +15,6 @@ describe('SongController', function() {
   var TURN_NUMBER = 5;
 
   beforeEach(inject(function($rootScope, $controller) {
-    // SongFetcherService = jasmine.createSpyObj('SongFetcherService', ['currentSong', 'remainingSongs', 'storeGuessAndCalculate']);
-    // SongFetcherService.currentSong.and.returnValue(song1);
     SongsService = jasmine.createSpyObj('SongsService', ['getAlbum', 'nextSong']);
     GameLogicService = jasmine.createSpyObj('GameLogicService', ['getCurrentTurnNumber'])
     GameLogicService.getCurrentTurnNumber.and.returnValue(TURN_NUMBER)
@@ -32,7 +29,6 @@ describe('SongController', function() {
     ctrl = $controller('SongController', {
       ngAudio: ngAudio,
       sound: sound,
-      // SongFetcherService: SongFetcherService,
       CurrentSongService: CurrentSongService,
       SongsService: SongsService,
       GameLogicService: GameLogicService,
@@ -40,22 +36,6 @@ describe('SongController', function() {
       $state: stateMock
     });
   }));
-
-  describe('#playCurrentSong', function(){
-
-    it('plays song', function(){
-      ctrl.playCurrentSong();
-      expect(ngAudio.load).toHaveBeenCalled()
-      expect(sound.play).toHaveBeenCalled();
-      expect(PlayLogService.listen).toHaveBeenCalled();
-      expect(GameLogicService.getCurrentTurnNumber).toHaveBeenCalled();
-    });
-
-    it('passes the clip duration to SongFetcherService.currentSong', function(){
-      ctrl.playCurrentSong(CLIP_DURATION);
-      expect(CurrentSongService.currentSongPreviewUrl).toHaveBeenCalledWith(TURN_NUMBER, CLIP_DURATION);
-    })
-  })
 
   describe('#changeToAnswerState', function() {
     it('calls ctrl.changeToAnswerState', function() {
