@@ -1,5 +1,8 @@
-angular.module('introGame.currentSongService', ['introGame.songsService'])
-  .service('CurrentSongService', ['SongsService', function(SongsService){
+angular.module('introGame.currentSongService', ['introGame.songsService', 'ngAudio'])
+  .service('CurrentSongService', ['SongsService',
+                                  'ngAudio',
+                                  function(SongsService,
+                                           ngAudio){
     var self = this;
     var URL_APPEND_STRING = '#t=,'
 
@@ -11,13 +14,18 @@ angular.module('introGame.currentSongService', ['introGame.songsService'])
     self.currentSong = function(turnNumber) {
       return SongsService.getSongAtPosition(turnNumber);
     }
-    
+
     self.sortedRemainingSongs = function(turnNumber){
       allSongs = SongsService.getAllSongs();
       return _sorted(allSongs.filter(function(currentValue, index){
         return index >= turnNumber;
       }));
     }
+
+    self.playCurrentSong = function(turnNumber, duration){
+      var sound = ngAudio.load(self.currentSongPreviewUrl(turnNumber, duration));
+      sound.play()
+    };
 
     function _sorted(songs){
       return songs.sort(_sortObjectArray);
@@ -26,4 +34,6 @@ angular.module('introGame.currentSongService', ['introGame.songsService'])
     function _sortObjectArray(a, b){
       return Number(a.title > b.title);
     }
+
+
 }]);

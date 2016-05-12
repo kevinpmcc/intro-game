@@ -2,8 +2,8 @@ module.exports = function(config){
   config.set({
      basePath : '../',
      files : [
-        'www/lib/underscore/underscore.js',
         'www/lib/ionic/js/ionic.bundle.js',
+        'www/lib/angular-audio/app/angular.audio.js',
         'www/lib/ionic/js/angular-mocks/angular-mocks.js',
         'www/js/**/*.js',
         'test/unit/**/*.js'

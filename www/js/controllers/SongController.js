@@ -1,43 +1,37 @@
 angular.module('introGame.songController',['ui.router'])
-  .controller('SongController', ['SongsService',
-                                 'GameLogicService',
+  .controller('SongController', ['GameLogicService',
                                  'CurrentSongService',
                                  'PlayLogService',
                                  '$state',
-                                 'ngAudio',
-                                 function(SongsService,
-                                          GameLogicService,
+                                 function(GameLogicService,
                                           CurrentSongService,
                                           PlayLogService,
-                                          $state, ngAudio) {
+                                          $state) {
 
     var self = this;
 
-    self.loadCurrentSong = function(duration) {
-      var currentTurn = GameLogicService.getCurrentTurnNumber();
-      return CurrentSongService.currentSongPreviewUrl(currentTurn, duration);
-    }
+
 
     self.playCurrentSong = function(duration){
-      var sound = ngAudio.load(self.loadCurrentSong(duration));
-      var currentTurn = GameLogicService.getCurrentTurnNumber();
-      PlayLogService.listen(currentTurn, duration)
-      sound.play()
-    };
+      CurrentSongService.playCurrentSong(_currentTurn(), duration);
+      PlayLogService.listen(_currentTurn(), duration)
+    }
 
     self.changeToAnswerState = function(){
       $state.go('answer', {})
     }
 
     self.remainingSongs = function(){
-      var currentTurn = GameLogicService.getCurrentTurnNumber();
-      return CurrentSongService.sortedRemainingSongs(currentTurn);
+      return CurrentSongService.sortedRemainingSongs(_currentTurn());
     }
 
     self.guessSong = function(song) {
-      var currentTurn = GameLogicService.getCurrentTurnNumber();
-      PlayLogService.guess(currentTurn, song)
+      PlayLogService.guess(_currentTurn(), song)
       self.changeToAnswerState();
+    }
+
+    function _currentTurn() {
+      return GameLogicService.getCurrentTurnNumber()
     }
 
 }]);
