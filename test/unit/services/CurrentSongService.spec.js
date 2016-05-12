@@ -13,36 +13,14 @@ describe('CurrentSongService', function() {
   var URL_APPEND_STRING = "#t=,"
   var SONG = {previewUrl: PREVIEW_URL};
 
-
-
-
   beforeEach(module('introGame.currentSongService'))
 
-
   beforeEach(inject(function(_CurrentSongService_, _SongsService_, _ngAudio_){
-
-    // console.log(CurrentSongService)
-
     sound = jasmine.createSpyObj('sound', ['play']);
-    // ngAudioProvider ="guff";
-    // ngAudio = jasmine.createSpyObj('ngAudio',['load']);
-    // ngAudio.load.and.returnValue(sound);
-
-    // SongsService = jasmine.createSpyObj('SongsService',['getSongAtPosition', 'getAllSongs'])
-    // // SongsService.getAllSongs.and.returnValue(BOGUS_SONGS);
-    // SongsService.getSongAtPosition.and.returnValue(SONG);
-    // //
-    // GameLogicService = jasmine.createSpyObj('GameLogicService', ['getCurrentTurnNumber'])
-
-
     ngAudio = _ngAudio_;
     CurrentSongService = _CurrentSongService_;
     SongsService = _SongsService_;
-
-
-
   }));
-
 
   describe('#currentSongPreviewUrl', function() {
     it('returns song with appropriate clip length', function() {
@@ -56,14 +34,12 @@ describe('CurrentSongService', function() {
     beforeEach(function(){
       spyOn(SongsService, 'getSongAtPosition').and.returnValue(SONG);
       spyOn(ngAudio, 'load').and.returnValue(sound);
-      // spyOn(PlayLogService, 'listen')
     })
 
     it('plays song', function(){
       CurrentSongService.playCurrentSong();
       expect(ngAudio.load).toHaveBeenCalled()
       expect(sound.play).toHaveBeenCalled();
-      // expect(GameLogicService.getCurrentTurnNumber).not.toHaveBeenCalled();
     });
 
     it('passes the clip duration to SongFetcherService.currentSong', function(){
