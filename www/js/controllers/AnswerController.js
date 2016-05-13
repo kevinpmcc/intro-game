@@ -38,7 +38,19 @@ angular.module('introGame.answerController',[])
 
     self.isGameEnd = function() {
       return GameLogicService.isGameEnd()
-    }
+    };
+
+    self.guessScore = function() {
+      return PlayLogService.guessScore()
+    };
+
+    self.guessDuration = function() {
+      if(PlayLogService.guessDuration() === 1) {
+        return PlayLogService.guessDuration() + " second"
+      } else {
+        return PlayLogService.guessDuration() + " seconds"
+      }
+    };
 
 
 }]);
