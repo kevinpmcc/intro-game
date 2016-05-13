@@ -1,7 +1,6 @@
 describe('ArtistService', function() {
 
   var ArtistService;
-  var SongFactory;
   var httpBackend;
   var apiJsonResponse = getApiJsonResponse();
   var artistID = '711MCceyCBcFnzjGY4Q7Un'
@@ -24,7 +23,7 @@ describe('ArtistService', function() {
 
     it('retrieves data from API and stores in an array of images', function(){
       ArtistService.getArtistImages(artistID).then(function(response){
-        expect(ArtistService.artistImages).toEqual(apiJsonResponse.images);
+        expect(response).toEqual(apiJsonResponse.images);
       });
     });
   });

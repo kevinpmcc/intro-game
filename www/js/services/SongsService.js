@@ -1,5 +1,5 @@
-angular.module('introGame.songsService', ['introGame.songFactory', 'introGame.artistService'])
-  .service('SongsService', ['$http', 'SongFactory', 'ArtistService', function($http, SongFactory, ArtistService){
+angular.module('introGame.songsService', ['introGame.songFactory'])
+  .service('SongsService', ['$http', 'SongFactory', function($http, SongFactory){
     var self = this;
 
     self.songs =[];

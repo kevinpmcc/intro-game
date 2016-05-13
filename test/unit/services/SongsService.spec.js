@@ -1,7 +1,6 @@
 describe('SongsService', function() {
 
   var SongsService;
-  var ArtistService;
   var SongFactory;
   var httpBackend;
   var apiJsonResponse = getApiJsonResponse();
@@ -18,11 +17,10 @@ describe('SongsService', function() {
 
   beforeEach(module('introGame.songsService'));
 
-  beforeEach(inject(function(_SongsService_, _SongFactory_, _ArtistService_, $httpBackend, $rootScope, $q) {
+  beforeEach(inject(function(_SongsService_, _SongFactory_, $httpBackend, $rootScope, $q) {
     SongFactory = _SongFactory_;
     httpBackend = $httpBackend;
     SongsService = _SongsService_;
-    ArtistService = _ArtistService_;
   }));
 
   describe('#getAlbum', function(){
@@ -48,13 +46,6 @@ describe('SongsService', function() {
         expect(SongsService._newSongFactory.calls.count()).toEqual(10);
       });
     });
-
-    it('invokes ArtistService.getArtist() for each song returned by API', function(){
-      spyOn(ArtistService,'getArtistImages');
-      SongsService.getAlbum(album).then(function(results){
-        expect(ArtistService.getArtistImages.calls.count()).toEqual(10);
-      });
-    })
   });
 
   describe("accessing song data", function(){
