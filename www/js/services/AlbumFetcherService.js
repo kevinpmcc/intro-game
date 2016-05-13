@@ -30,13 +30,13 @@ angular.module('introGame.albumFetcherService', [])
       title: "OK Computer",
       albumID: "7dxKtc08dYeRVHt3p9CZJn",
       img_url: "https://i.scdn.co/image/f89c1ecdd0cc5a23d5ad7303d4ae231d197dde98"},
-      {artist: "Dr Dre",
-      title: "2001",
-      albumID: "5csXMdS69VOvh8MjyfwkjB",
-      img_url: "https://i.scdn.co/image/71705ba0970102931b21f5dd9fc47a7746df90ae"},
-      {artist: "Arcade Fire",
-      title: "Funeral",
-      albumID: "0530hyl3GtZKWPebWVMZkK",
-      img_url: "https://i.scdn.co/image/0545b22a34a2399ccf000951ce7b4425c720a836"}
+      {artist: "Michael Jackson",
+      title: "Thriller",
+      albumID: "2ANVost0y2y52ema1E9xAZ",
+      img_url: "https://i.scdn.co/image/a743b6fed33ddb79e39433baa60e51dc9880192f"},
+      {artist: "Queen",
+      title: "Greatest Hits",
+      albumID: "3VWrUk4vBznMYXGMPc7dRB",
+      img_url: "https://i.scdn.co/image/8995c45551984864859c3b7c127e3e234e3307f4"}
        ];
   });
