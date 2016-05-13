@@ -1,5 +1,5 @@
-angular.module('introGame.songsService', ['introGame.songFactory'])
-  .service('SongsService', ['$http', 'SongFactory', function($http, SongFactory){
+angular.module('introGame.songsService', ['introGame.songFactory', 'introGame.artistService'])
+  .service('SongsService', ['$http', 'SongFactory', 'ArtistService', function($http, SongFactory, ArtistService){
     var self = this;
 
     self.songs =[];
@@ -16,9 +16,9 @@ angular.module('introGame.songsService', ['introGame.songFactory'])
       return self.songs[index];
     }
 
-    self.getAlbum = function(albumID){
-      return $http.get('https://api.spotify.com/v1/albums/' + albumID + '/tracks')
-      .then(_shuffleResponseFromApi);
+    self.getAlbum = function(album){
+      return $http.get('https://api.spotify.com/v1/albums/' + album.albumID + '/tracks')
+      .then(_shuffleResponseFromApi)
     };
 
     function _shuffleResponseFromApi(response) {
