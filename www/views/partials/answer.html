@@ -1,16 +1,16 @@
 <ion-content text-align="center">
   <div id="answer" ng-controller="AnswerController as controller">
-    <h2 style="text-align: center; margin-top: 50px; color: green;"><span ng-if="controller.isCorrectGuess()"><p>Correct!</p></h2>
-    <h4 style="text-align: center;" ng-if="controller.isCorrectGuess()">You got it in {{ controller.guessDuration() }}!</h4></span>
-    <h1 ng-if="controller.isCorrectGuess()" style="text-align: center;" style="font-size: 200%;">+ {{ controller.guessScore() }} points! </h1>
+    <h2 style="text-align: center; margin-top: 40px; color: green;"><span ng-if="controller.isCorrectGuess()"><p>Correct!</p></h2>
+    <h4 style="text-align: center; margin-top: 25px;" ng-if="controller.isCorrectGuess()">You got it in {{ controller.guessDuration() }}!</h4></span>
+    <h1 ng-if="controller.isCorrectGuess()" style="text-align: center; margin-top: 25px;" style="font-size: 200%;">+ {{ controller.guessScore() }} points! </h1>
     <h2 ng-if="!controller.isCorrectGuess()" style="text-align: center; color: red;">Incorrect!</h2>
     <div class="card">
-      <div style="text-align: center;" >
+      <div style="text-align: center; margin-top: 25px; margin-bottom: 25px;" >
         <h3>{{ controller.currentSong().title }}</h3>
-        <p>{{ controller.currentSong().artist }}</p>
+        <h4>{{ controller.currentSong().artist }}</h4>
       </div>
     </div>
-    <h5 style="text-align: center;">Total score: {{ controller.totalScore() }}</h5>
+    <h3 style="text-align: center; margin-top: 25px;">Total score: {{ controller.totalScore() }}</h3>
     <button id="play-another" class="button" style="position: fixed; bottom: 0; margin-bottom: 50px; margin-left: 30px;" ng-if="!controller.isGameEnd()" ng-click="controller.nextTurn()">Next song</button>
     <button id="new-album" class="button"  style="position: fixed; bottom: 0; right: 0; margin-bottom: 50px; margin-right: 30px;"ng-click="controller.changeToAlbumsState()">New album</button>
   </div>
