@@ -1,14 +1,18 @@
-angular.module('introGame.answerController',[])
+angular.module('introGame.answerController',['introGame.artistService'])
   .controller('AnswerController', ['GameLogicService',
                                  'CurrentSongService',
                                  'PlayLogService',
+                                 'ArtistService',
                                  '$state',
                                  function(GameLogicService,
                                           CurrentSongService,
                                           PlayLogService,
+                                          ArtistService,
                                           $state) {
 
     var self = this;
+
+    self.artistImages = [];
 
     self.totalScore = function() {
       return PlayLogService.totalScore();
@@ -28,6 +32,13 @@ angular.module('introGame.answerController',[])
       $state.go('song', {})
     };
 
+    self.getArtistImages = function() {
+      ArtistService.getArtistImages(self.currentSong().artistID)
+        .then(function(response){
+          self.artistImages = response;
+      })
+    }
+
     self.isCorrectGuess = function() {
       return PlayLogService.isLastGuessCorrect()
     }
@@ -39,6 +50,8 @@ angular.module('introGame.answerController',[])
     self.isGameEnd = function() {
       return GameLogicService.isGameEnd()
     }
+
+    self.getArtistImages();
 
 
 }]);

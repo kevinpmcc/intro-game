@@ -8,6 +8,11 @@ describe('AlbumController', function() {
   var ctrl;
   var albumID = "10v912xgTZbjAtYfyKWJCS"
 
+  var album = {artist: "AC/DC",
+           title: "Highway to Hell",
+           albumID: "10v912xgTZbjAtYfyKWJCS",
+           img_url: "https://i.scdn.co/image/42dab3e45b3b9f2ba85538f8dc08e544ac9778d2"}
+
   beforeEach(inject(function($rootScope, $controller, $q) {
    deferred = $q.defer();
    AlbumFetcherService = jasmine.createSpyObj('AlbumFetcherService', ['getAlbums']);
@@ -38,9 +43,13 @@ describe('AlbumController', function() {
 
   describe('#loadSongToGuess', function() {
     beforeEach(function(){
-      ctrl.loadSongToGuess(albumID);
+      ctrl.loadSongToGuess(album);
       scope.$apply();
     });
+
+    it('calls SongsService.getAlbum with album object', function(){
+      expect(SongsService.getAlbum).toHaveBeenCalledWith(album);
+    })
 
     it('calls GameLogicService.newGame()', function(){
       expect(GameLogicService.newGame).toHaveBeenCalled();

@@ -8,6 +8,12 @@ describe('SongsService', function() {
   var albumID = '10v912xgTZbjAtYfyKWJCS';
   var NUM_SONGS = 10;
 
+  var album = {artist: "AC/DC",
+           title: "Highway to Hell",
+           albumID: "10v912xgTZbjAtYfyKWJCS",
+           img_url: "https://i.scdn.co/image/42dab3e45b3b9f2ba85538f8dc08e544ac9778d2"}
+
+
 
   beforeEach(module('introGame.songsService'));
 
@@ -19,7 +25,7 @@ describe('SongsService', function() {
 
   describe('#getAlbum', function(){
     beforeEach(function(){
-      httpBackend.expectGET('https://api.spotify.com/v1/albums/' + albumID + '/tracks').respond(apiJsonResponse);
+      httpBackend.expectGET('https://api.spotify.com/v1/albums/' + album.albumID + '/tracks').respond(apiJsonResponse);
     });
 
     afterEach(function(){
@@ -27,7 +33,7 @@ describe('SongsService', function() {
     });
 
     it('retrieves data from API and stores in an array of song objects', function(){
-      SongsService.getAlbum(albumID).then(function(){
+      SongsService.getAlbum(album).then(function(){
         expect(sorted(SongsService.songs)[0].artist).toEqual(expectedResponse[0].artist);
         expect(sorted(SongsService.songs)[0].title).toEqual(expectedResponse[0].title);
         expect(sorted(SongsService.songs)[0].previewUrl).toEqual(expectedResponse[0].previewUrl);
@@ -36,7 +42,7 @@ describe('SongsService', function() {
 
     it('invokes SongFactory for each song returned by API ', function() {
       spyOn(SongsService, '_newSongFactory');
-      SongsService.getAlbum(albumID).then(function(results){
+      SongsService.getAlbum(album).then(function(results){
         expect(SongsService._newSongFactory.calls.count()).toEqual(10);
       });
     });

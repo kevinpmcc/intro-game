@@ -31,5 +31,4 @@ angular.module('introGame.albumController',['ui.router', 'introGame.playLogServi
     }
 
     self.loadAlbums();
-
   }]);

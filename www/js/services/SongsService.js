@@ -16,9 +16,9 @@ angular.module('introGame.songsService', ['introGame.songFactory'])
       return self.songs[index];
     }
 
-    self.getAlbum = function(albumID){
-      return $http.get('https://api.spotify.com/v1/albums/' + albumID + '/tracks')
-      .then(_shuffleResponseFromApi);
+    self.getAlbum = function(album){
+      return $http.get('https://api.spotify.com/v1/albums/' + album.albumID + '/tracks')
+      .then(_shuffleResponseFromApi)
     };
 
     function _shuffleResponseFromApi(response) {

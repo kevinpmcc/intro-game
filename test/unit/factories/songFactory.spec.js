@@ -8,10 +8,16 @@ describe('SongFactory', function() {
   }));
 
   it('creates songs', function() {
-    expect(sf.artist).toEqual("AC/DC")
-    expect(sf.title).toEqual("Highway to Hell")
-    expect(sf.previewUrl).toEqual('https://p.scdn.co/mp3-preview/aa4f9186e0c3f4436bb40572a63862db80d7ef2d')
+    expect(sf.artist).toEqual("AC/DC");
+    expect(sf.title).toEqual("Highway to Hell");
+    expect(sf.previewUrl).toEqual('https://p.scdn.co/mp3-preview/aa4f9186e0c3f4436bb40572a63862db80d7ef2d');
+    expect(sf.artistID).toEqual(song.artists[0].id);
   });
+
+  var album =       {artist: "AC/DC",
+         title: "Highway to Hell",
+         albumID: "10v912xgTZbjAtYfyKWJCS",
+         img_url: "https://i.scdn.co/image/42dab3e45b3b9f2ba85538f8dc08e544ac9778d2"}
 
   var song = {
    "artists" : [ {

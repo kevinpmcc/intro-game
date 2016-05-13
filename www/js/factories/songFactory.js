@@ -5,7 +5,8 @@ angular.module('introGame.songFactory', [])
       this.artist = track.artists[0].name;
       this.title = track.name;
       this.previewUrl = track.preview_url;
-      this.appendedPreviewUrl = ""
+      this.appendedPreviewUrl = "";
+      this.artistID = track.artists[0].id;
     };
     return createSong;
   });

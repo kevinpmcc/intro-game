@@ -3,7 +3,7 @@
 </ion-header-bar>
 <ion-content id="albums" ng-controller="AlbumController as controller">
   <ion-list class="list">
-    <ion-item id="{{ $index }}"ng-repeat="album in controller.albums" class="item item-thumbnail-left" ng-click="controller.loadSongToGuess('{{album.albumID}}')">
+    <ion-item id="{{ $index }}"ng-repeat="album in controller.albums" class="item item-thumbnail-left" ng-click="controller.loadSongToGuess(album)">
       <img src="{{ album.img_url }}">
       <h3> {{ album.title }} </h3>
       <p> {{ album.artist }} </p>
