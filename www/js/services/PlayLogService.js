@@ -35,6 +35,14 @@ angular.module('introGame.playLogService', ['introGame.playFactory', 'introGame.
       }, 0)
     }
 
+    self.guessDuration = function() {
+      return self.plays[self.plays.length - 1].duration;
+    };
+
+    self.guessScore = function() {
+      return self.plays[self.plays.length - 1].score;
+    };
+
     function _evaluateGuess(turnNumber) {
       var currentSongTitle = SongsService.getSongAtPosition(turnNumber).title;
       var currentPlay = self.plays[turnNumber];
@@ -43,4 +51,6 @@ angular.module('introGame.playLogService', ['introGame.playFactory', 'introGame.
         currentPlay.correctGuess = true;
       }
     }
+
+
   }])
