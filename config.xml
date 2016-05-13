@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <widget id="com.ionicframework.ionictest967869" version="0.0.1" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-  <name>ionicTest</name>
+  <name>SecondGuessing</name>
   <description>
-        An Ionic Framework and Cordova project.
+        A 21st century take on the family favourite 'Name That Tune'
     </description>
-  <author email="you@example.com" href="http://example.com.com/">
+  <author email="peteburch223@gmail.com" href="">
       Your Name Here
     </author>
   <content src="index.html"/>
