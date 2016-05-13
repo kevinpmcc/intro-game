@@ -5,7 +5,7 @@
   <div id="answer" ng-controller="AnswerController as controller">
     <h2><span ng-if="controller.isCorrectGuess()">Correct</span>
     <span ng-if="!controller.isCorrectGuess()">Incorrect</span></h2>
-    <img src="{{ controller.artistImages[controller.artistImages.length - 2].url }}">
+    <img width="100" src="{{ controller.artistImages[0].url }}">
 
     <h3>{{ controller.currentSong().artist }}</h3>
     <p>{{ controller.currentSong().title }}</p>
