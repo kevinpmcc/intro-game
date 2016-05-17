@@ -345,24 +345,23 @@ describe("Current Angular UI router state", function () {
       expect(currentStateName).toEqual("answer");
     })
 
-    xit('informs the user if guess is correct', function() {
+    it('informs the user if guess is correct', function() {
       element(by.id('0')).click();
       var tracks = element.all(by.repeater('song in controller.remainingSongs()'))
       tracks.get(2).element(by.tagName('p')).click()
-      expect(element(by.tagName('h2')).getText()).toContain("orrect")
+      expect(element(by.id('correct-or-incorrect')).getText()).toContain("orrect")
 
     })
 
-    xit('displays the score to the user', function() {
+    it('displays the score to the user', function() {
       element(by.id('0')).click();
       element(by.id('play-button-1')).click();
       var tracks = element.all(by.repeater('song in controller.remainingSongs()'))
-
       tracks.get(2).element(by.tagName('p')).click()
-      expect(element(by.tagName('h5')).getText()).toEqual('0');
+      expect(element(by.id('score')).getText()).toBeLessThan(7)
     })
 
-    xit('hides the play another song button if there are not enough songs remaining', function() {
+    it('hides the play another song button if there are not enough songs remaining', function() {
       element(by.id('0')).click();
       var tracks = element.all(by.repeater('song in controller.remainingSongs()'))
       for(var i = 0; i < 9; i++) {
