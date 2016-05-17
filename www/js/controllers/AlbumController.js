@@ -10,9 +10,12 @@ angular.module('introGame.albumController',['ui.router', 'introGame.playLogServi
 
     self.albums = [];
 
-    self.loadAlbums = function() {
-      return AlbumFetcherService.getAlbums()
-        .then(function(results) {
+
+
+    self.loadAlbums = function(search) {
+      return AlbumFetcherService.getAlbums(search)
+        .then(function(results){
+          console.log(results)
           self.albums = results;
         });
     };
@@ -30,5 +33,5 @@ angular.module('introGame.albumController',['ui.router', 'introGame.playLogServi
       $state.go('song', {})
     }
 
-    self.loadAlbums();
+
   }]);

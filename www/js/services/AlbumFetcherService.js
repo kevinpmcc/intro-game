@@ -1,18 +1,38 @@
-angular.module('introGame.albumFetcherService', [])
-  .service('AlbumFetcherService', function(){
+angular.module('introGame.albumFetcherService', ['introGame.albumFactory'])
+  .service('AlbumFetcherService', ['$http', 'AlbumFactory', function($http, AlbumFactory){
 
     var af = this;
 
-    af.getAlbums = function(){
-      return new Promise(function (resolve,reject){
-        if (true){
-        resolve(allAlbums);
-      }
-        else { reject(allAlbums);
 
-        }
-      })
+
+    af.getAlbums = function(search){
+     return $http.get('https://api.spotify.com/v1/search?q=' + search + '&type=album')
+        .then (function(response){
+          console.log(response)
+          return af.processAlbum(response);
+      });
+    };
+
+    af.processAlbum = function(response){
+      return response.data.albums.items.map(function(search){
+        return af._newAlbumFactory(search)
     }
+  )};
+
+    af._newAlbumFactory = function(response){
+      return new AlbumFactory(response);
+    }
+
+
+      // new Promise(function (resolve,reject){
+      //   if (true){
+      //   resolve(allAlbums);
+      // }
+      //   else { reject(allAlbums);
+      //
+      //   }
+      // })
+    // }
     var allAlbums = [
       {artist: "AC/DC",
        title: "Highway to Hell",
@@ -39,4 +59,4 @@ angular.module('introGame.albumFetcherService', [])
       albumID: "0530hyl3GtZKWPebWVMZkK",
       img_url: "https://i.scdn.co/image/0545b22a34a2399ccf000951ce7b4425c720a836"}
        ];
-  });
+  }]);
