@@ -11,6 +11,7 @@ angular.module('introGame.app', ['ionic',
                                 'introGame.playLogService',
                                 'introGame.songFactory',
                                 'introGame.playFactory',
+                                'introGame.albumFactory',
                                 'introGame.albumFetcherService'])
 
 .run(function($ionicPlatform) {

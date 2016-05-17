@@ -11,7 +11,7 @@ describe('SongsService', function() {
   var album = {artist: "AC/DC",
            title: "Highway to Hell",
            albumID: "10v912xgTZbjAtYfyKWJCS",
-           img_url: "https://i.scdn.co/image/42dab3e45b3b9f2ba85538f8dc08e544ac9778d2"}
+           img_url: "https://i.scdn.co/image/42dab3e45b3b9f2ba85538f8dc08e544ac9778d2"};
 
 
 
@@ -54,7 +54,7 @@ describe('SongsService', function() {
       for(var i=0; i < NUM_SONGS; i++){
         SongsService.songs.push({title: "Title" + i});
       }
-    })
+    });
 
     describe("#getAllSongs", function(){
       it('provides an array of all fetched songs', function(){
@@ -69,16 +69,16 @@ describe('SongsService', function() {
     describe("#getNumberOfSongs", function(){
       it('returns the number of songs in the SongsService.songs array', function(){
         expect(SongsService.getNumberOfSongs()).toEqual(NUM_SONGS);
-      })
+      });
     });
 
     describe("#getSongAtPosition", function(){
       it('returns the song at position the SongsService.songs array', function(){
         expect(SongsService.getSongAtPosition(3)).toEqual({title: "Title3"});
-      })
+      });
     });
 
-  })
+  });
 
 
   function sorted(songs){
@@ -96,7 +96,7 @@ describe('SongsService', function() {
                     {"artist" : "AC/DC",
                      "title" : "Walk All over You",
                     "previewUrl" : "https://p.scdn.co/mp3-preview/82bdae1a32ffd4bee3ea4b270687922286b50a3f"}];
-  };
+  }
 
   function getApiJsonResponse(){
     return {
@@ -358,5 +358,5 @@ describe('SongsService', function() {
     "previous" : null,
     "total" : 10
     };
-  };
+  }
 });

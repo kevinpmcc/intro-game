@@ -3,7 +3,7 @@ describe('ArtistService', function() {
   var ArtistService;
   var httpBackend;
   var apiJsonResponse = getApiJsonResponse();
-  var artistID = '711MCceyCBcFnzjGY4Q7Un'
+  var artistID = '711MCceyCBcFnzjGY4Q7Un';
 
   beforeEach(module('introGame.artistService'));
 
@@ -28,7 +28,7 @@ describe('ArtistService', function() {
     });
   });
 
-})
+});
 
 
   function getApiJsonResponse(){
@@ -64,5 +64,5 @@ describe('ArtistService', function() {
   "popularity" : 80,
   "type" : "artist",
   "uri" : "spotify:artist:711MCceyCBcFnzjGY4Q7Un"
-}
 };
+}
