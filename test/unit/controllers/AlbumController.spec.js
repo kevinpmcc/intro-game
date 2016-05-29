@@ -34,13 +34,6 @@ describe('AlbumController', function() {
    });
  }));
 
-  it('stores album data in an array', function() {
-    expect(ctrl.albums).toBeDefined();
-    scope.$apply();
-    ctrl.loadAlbums();
-    expect(ctrl.albums[0]).toEqual('koala bear');
-  });
-
   describe('#loadSongToGuess', function() {
     beforeEach(function(){
       ctrl.loadSongToGuess(album);

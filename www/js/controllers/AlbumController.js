@@ -10,15 +10,18 @@ angular.module('introGame.albumController',['ui.router', 'introGame.playLogServi
 
     self.albums = [];
 
-    self.loadAlbums = function() {
-      return AlbumFetcherService.getAlbums()
-        .then(function(results) {
+
+
+    self.loadAlbums = function(search) {
+      return AlbumFetcherService.getAlbums(search)
+        .then(function(results){
+          console.log("results",results)
           self.albums = results;
         });
     };
 
-    self.loadSongToGuess = function(albumID) {
-      return SongsService.getAlbum(albumID)
+    self.loadSongToGuess = function(album) {
+      return SongsService.getAlbum(album)
         .then(function() {
           GameLogicService.newGame();
           PlayLogService.newGame();
@@ -30,5 +33,5 @@ angular.module('introGame.albumController',['ui.router', 'introGame.playLogServi
       $state.go('song', {})
     }
 
-    self.loadAlbums();
+
   }]);
