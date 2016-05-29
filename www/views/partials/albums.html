@@ -1,9 +1,19 @@
-<ion-content id="albums" ng-controller="AlbumController as controller">
+<div class="container">
+<div id="albums" ng-controller="AlbumController as controller">
+  <h1><em>THE GAME</em><br>SEARCH FOR AN ALBUM TO BEGIN</h1>
+  <section class="search">
+    <form ng-submit="controller.loadAlbums(searchterms)">
+      <input type="text" ng-model="searchterms" id="bob"
+      placeholder="search-term" style="margin-bottom: 50px">
+      <button id="bob" class="btn btn-secondary btn-lg"type="submit" value="bob">Search</button>
+    </form>
+  </section>
   <ion-list class="list">
     <ion-item id="{{ $index }}"ng-repeat="album in controller.albums" class="item item-thumbnail-left" ng-click="controller.loadSongToGuess(album)">
-      <img src="{{ album.img_url }}">
-      <h3> {{ album.title }} </h3>
-      <p> {{ album.artist }} </p>
+      <img src="{{ album.imgUrl }}">
+      <h3> {{ album.name }} </h3>
+
     </ion-item>
   </ion-list>
-</ion-content>
+</div>
+</div>

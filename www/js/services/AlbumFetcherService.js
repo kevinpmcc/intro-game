@@ -1,12 +1,13 @@
 angular.module('introGame.albumFetcherService', ['introGame.albumFactory'])
-.service('AlbumFetcherService', ['$http', 'AlbumFactory', function(){
+.service('AlbumFetcherService', ['$http', 'AlbumFactory', function($http, AlbumFactory){
 
   var af = this;
 
-  af.getAlbums = function(){
+  af.getAlbums = function(searchTerm){
+    console.log("HELLO")
     return $http.get('https://api.spotify.com/v1/search?q=' + searchTerm + '&type=album')
       .then (function(response) {
-        return af.processAlbum(response);
+        return af._processAlbum(response);
       });
   };
 
@@ -15,8 +16,13 @@ angular.module('introGame.albumFetcherService', ['introGame.albumFactory'])
       return af._newAlbumFactory(response);
     });
   };
-}]);
 
+  af._newAlbumFactory = function(album){
+    return new AlbumFactory(album);
+  };
+
+}]);
+/*
 var allAlbums = [
 {artist: "AC/DC",
   title: "Highway to Hell",
@@ -43,4 +49,4 @@ var allAlbums = [
   albumID: "0530hyl3GtZKWPebWVMZkK",
   img_url: "https://i.scdn.co/image/0545b22a34a2399ccf000951ce7b4425c720a836"}
   ]
-  
+ */ 
