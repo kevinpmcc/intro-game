@@ -1,1 +1,47 @@
 /* Empty. Add your own CSS if you like */
+h1 {
+  font-family: 'Muli', sans-serif;
+  text: bold;
+  font-size: 800%;
+}
+
+h2 {
+  font-family: 'Muli', sans-serif;
+  font-size: 200%;
+}
+ion-content {
+  text-align: center;
+}
+
+#container {
+  padding-top: 50px;
+  padding-right: 20%;
+  /*padding-bottom: 50px;*/
+  padding-left: 20%;
+}
+.center {
+  margin: auto;
+}
+input {
+  position: relative;
+  margin: auto;
+  text-align: center;
+  border: 5px;
+}
+#albums {
+  background-color: #EFEDE1;
+}
+
+.btn-search {
+  display: inline-block;
+  margin: 0.8em;
+  padding: 0.275em 0.775em;
+  border: 2px solid #191919;
+  color: #191919;
+  line-height: 1.5;
+  min-width: 5.575em;
+  background-color: transparent;
+  -webkit-transition: color 0.2s ease-out, background-color 0.2s ease-out;
+  -moz-transition: color 0.2s ease-out, background-color 0.2s ease-out;
+  transition: color 0.2s ease-out, background-color 0.2s ease-out;
+}
