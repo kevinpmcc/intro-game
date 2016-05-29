@@ -4,31 +4,29 @@ describe('AlbumFetcherService', function() {
   var httpBacked;
   var AlbumFactory;
   var apiJsonResponse = getApiJsonResponse();
-  var scope;
   var searchTerm = 'flowers';
-    beforeEach(module('introGame.albumFetcherService'));
+
+  beforeEach(module('introGame.albumFetcherService'));
 
   beforeEach(inject(function(_AlbumFetcherService_, _AlbumFactory_, $httpBackend,  $rootScope, $q) {
     httpBackend = $httpBackend;
-    deferred = $q.defer();
     AlbumFactory = _AlbumFactory_;
     AlbumFetcherService = _AlbumFetcherService_;
-    scope = $rootScope;
   }));
 
   describe('#getAlbums', function(){
     beforeEach(function(){
-      httpBackend.expectGET('http//api.spotify.com/v1/search?q=' + searchTerm + '&type=album').respond(apiJsonResponse);
+      httpBackend.expectGET('https://api.spotify.com/v1/search?q=' + searchTerm + '&type=album').respond(apiJsonResponse);
     });
+
     afterEach(function(){
       httpBackend.flush();
     });
 
-    it('returns an array of albums', function(done) {
-      scope.$apply();
-      AlbumFetcherService.getAlbums().then(function(results){
-        expect(results.length).toEqual(6);
-        done();
+    it('calls on newAlbumFactory array of albums', function() {
+      spyOn(AlbumFetcherService, '_newAlbumFactory');
+      AlbumFetcherService.getAlbums(searchTerm).then(function(results){
+        expect(AlbumFetcherService._newAlbumFactory.calls.count()).toEqual(20);
       });
 
     });
