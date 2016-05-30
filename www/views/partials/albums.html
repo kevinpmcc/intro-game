@@ -1,28 +1,23 @@
 <ion-content id="albums" ng-controller="AlbumController as controller">
 <div id="container">
-  <h1><b>THE GAME</b></h1>
-  <h2>Search for your favourite albums below. See how easily you recognise
-    tracks from just a second.*</h2>
+  <h1><b>SPOTIFY GAME</b></h1>
+
   <section class="search center">
     <form ng-submit="controller.loadAlbums(searchterms)">
       <input type="text" ng-model="searchterms" id="album-search-box"
-      placeholder="album name" style="margin-bottom: 50px">
+      placeholder="search for an album ">
       <button id="album-search-btn" class="btn-search"type="submit"
         value="album-search-term">BEGIN</button>
     </form>
   </section>
-  <ion-list class="list">
-    <ion-item id="{{ $index }}"ng-repeat="album in controller.albums" class="item item-thumbnail-left" ng-click="controller.loadSongToGuess(album)">
+  <div class="list">
+    <div id="{{ $index }}"ng-repeat="album in controller.albums" class="item item-thumbnail-left" ng-click="controller.loadSongToGuess(album)">
       <img src="{{ album.imgUrl }}">
       <h3> {{ album.name }} </h3>
 
-    </ion-item>
-  </ion-list>
+    </div>
+  </div>
   <div id="further explanation">
-    You'll likely do much better/worse than you anticipate. Even if you get
-    every single one wrong only wrong that's okay. Don't stress. Its a game. Also I made this hopefully so you
-    enjoy it so don't get upset if it breaks or isn't exactly what you expect.
-    That's also okay. It really is. Drop me a line if there's something you'd
-    like me to change. I may just make a website just for you alone!
+
 </div>
 </ion-content>

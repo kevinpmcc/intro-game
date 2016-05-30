@@ -1,5 +1,6 @@
 <ion-content id="songs" ng-controller="SongController as controller">
-  <div style="text-align: center;">
+  <div id="container">
+  <div class="music-buttons" style="text-align: center;">
     <button class="button button-large button-outline button-dark" id="play-button-1" ng-click="controller.playCurrentSong(1)"><i class="icon ion-music-note"></i>  1s</button>
     <button class="button button-large button-outline button-dark" id="play-button-3" ng-click="controller.playCurrentSong(3)"><i class="icon ion-music-note"></i>  3s</button>
     <button class="button button-large button-outline button-dark" id="play-button-5" ng-click="controller.playCurrentSong(5)"><i class="icon ion-music-note"></i>  5s</button>
@@ -9,4 +10,5 @@
       <p>{{ song.title }}</p>
     </ion-item>
   <ion-list>
+  </div>
 </ion-content>
