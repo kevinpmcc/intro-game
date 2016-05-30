@@ -4,12 +4,12 @@ angular.module('introGame.albumFetcherService', ['introGame.albumFactory'])
   var af = this;
 
   af.getAlbums = function(searchTerm){
-
     return $http.get('https://api.spotify.com/v1/search?q=' + searchTerm + '&type=album')
       .then (function(response) {
         return af._processAlbum(response);
       });
   };
+
 
   af._processAlbum = function(response){
     return response.data.albums.items.map(function(response){
@@ -21,7 +21,7 @@ angular.module('introGame.albumFetcherService', ['introGame.albumFactory'])
     return new AlbumFactory(album);
   };
 
-  
+
 }]);
 //
 // var allAlbums = [

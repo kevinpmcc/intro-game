@@ -5,15 +5,15 @@
   <section class="search center">
     <form ng-submit="controller.loadAlbums(searchterms)">
       <input type="text" ng-model="searchterms" id="album-search-box"
-      placeholder="search for an album ">
+      placeholder="search for an album or choose one below">
       <button id="album-search-btn" class="btn-search"type="submit"
-        value="album-search-term">BEGIN</button>
+        value="album-search-term">search</button>
     </form>
   </section>
   <div class="list">
     <div id="{{ $index }}"ng-repeat="album in controller.albums" class="item item-thumbnail-left" ng-click="controller.loadSongToGuess(album)">
       <img src="{{ album.imgUrl }}">
-      <h3> {{ album.name }} </h3>
+      <h2> {{ album.title }} </h2>
 
     </div>
   </div>

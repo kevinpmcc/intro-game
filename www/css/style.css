@@ -2,7 +2,7 @@
 h1 {
   weight: heavy;
   text: bold;
-  font-size: 400%;
+  font-size: 5.9vw;
 }
 
 h1 h2 h3 h4 h5 h6 {
@@ -39,11 +39,14 @@ input {
   text-align: center;
   border: 5px;
   width: 100%;
+  font-size: 10%;
 }
 body {
   background-color: #EFEDE1;
 }
-
+input placeholder {
+   color: red;
+}
 .music-buttons {
   padding-bottom: 20px;
 }
