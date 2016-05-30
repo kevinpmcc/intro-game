@@ -24,6 +24,9 @@
     "gulp-rename": "^1.2.0",
     "http-server": "^0.9.0"
   },
+  "scripts": {
+      "start": "ionic serve"
+  },
   "cordovaPlugins": [
     "cordova-plugin-device",
     "cordova-plugin-console",
